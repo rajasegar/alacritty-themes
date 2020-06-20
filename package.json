@@ -1,0 +1,19 @@
+{
+  "name": "alacritty-themes",
+  "version": "1.0.0",
+  "description": "Themes for Alacritty",
+  "main": "index.js",
+  "bin": {
+    "alacritty-themes": "./bin/cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ['alacritty', 'theme', 'themes', 'terminal emulators', 'terminal'],
+  "author": "Rajasegar Chandran <rajasegar.c@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "inquirer": "^7.2.0",
+    "yaml": "^1.10.0"
+  }
+}
