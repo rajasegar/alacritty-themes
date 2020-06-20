@@ -21,4 +21,6 @@ npx alacritty-themes
 alacritty-themes
 ```
 
+![alacritty-themes demo gif](demo.gif)
+
 Choose the theme from the list of options and press Enter to apply.
