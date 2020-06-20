@@ -9,7 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ['alacritty', 'theme', 'themes', 'terminal emulators', 'terminal'],
+  "keywords": ["alacritty", "theme", "themes", "terminal emulators", "terminal"],
   "author": "Rajasegar Chandran <rajasegar.c@gmail.com>",
   "license": "MIT",
   "dependencies": {
