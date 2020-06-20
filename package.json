@@ -1,7 +1,7 @@
 {
   "name": "alacritty-themes",
   "version": "1.0.0",
-  "description": "Themes for Alacritty",
+  "description": "Themes for Alacritty : A cross-platform GPU-Accelerated Terminal emulator",
   "main": "index.js",
   "bin": {
     "alacritty-themes": "./bin/cli.js"
