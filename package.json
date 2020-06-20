@@ -1,6 +1,6 @@
 {
   "name": "alacritty-themes",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Themes for Alacritty : A cross-platform GPU-Accelerated Terminal emulator",
   "main": "index.js",
   "bin": {
@@ -9,7 +9,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["alacritty", "theme", "themes", "terminal emulators", "terminal"],
+  "keywords": [
+    "alacritty",
+    "theme",
+    "themes",
+    "terminal emulators",
+    "terminal"
+  ],
   "author": "Rajasegar Chandran <rajasegar.c@gmail.com>",
   "license": "MIT",
   "dependencies": {
