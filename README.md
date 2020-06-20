@@ -5,6 +5,7 @@ To find the list of themes, you can visit the alacritty [wiki page](https://gith
 
 - 50+ Themes to choose from
 - Option to create your `alacritty.yml` config file
+- Simple, Easy and intuitive User experience
 
 ## Install
 
@@ -27,13 +28,16 @@ alacritty-themes
 
 ![alacritty-themes demo gif](demo.gif)
 
-Choose the theme from the list of options and press Enter to apply.
+Choose the theme from the list of options and press `Enter` to apply.
+You can also navigate with `j` and `k` keys for up/down. The list of
+options are cycled through automatically so you can go to the last theme
+by just pressing `up arrow` key.
 
 If no `alacritty.yml` is found in your `$HOME` path, it will ask you to create one.
-You can choose to create one (`y/n`) and apply the selected theme.
+You can choose to create one by confirming (`y/n`) and apply the selected theme.
 
-## Alias
-You can also choose to create an alias for `alacritty-themes` like `at` 
+## Bonus Tip: Alias
+You can also create an alias for `alacritty-themes` like `at` 
 Just append this below line to your `~/.bashrc` or `~/.bash_profile`
 
 ```
