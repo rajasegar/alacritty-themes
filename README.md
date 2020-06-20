@@ -1,5 +1,5 @@
 # alacritty-themes
-Themes for [alacritty](https://github.com/alacritty/alacritty)  A cross-platform, GPU-accelerated terminal emulator 
+:rainbow: :lollipop: Themes :candy: for [alacritty](https://github.com/alacritty/alacritty)  A cross-platform, GPU-accelerated terminal emulator 
 
 To find the list of themes, you can visit the alacritty [wiki page](https://github.com/alacritty/alacritty/wiki/Color-schemes)
 
