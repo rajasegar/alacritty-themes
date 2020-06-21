@@ -21,5 +21,6 @@
   "dependencies": {
     "inquirer": "^7.2.0",
     "yaml": "^1.10.0"
-  }
+  },
+  "preferGlobal": true
 }

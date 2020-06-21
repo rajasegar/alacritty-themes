@@ -1,16 +1,17 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const applyTheme = require('../index');
-const inquirer = require('inquirer');
+const fs = require("fs");
+const path = require("path");
+const applyTheme = require("../index");
+const inquirer = require("inquirer");
 
-const themes = fs.readdirSync('./themes')
-  .map(f => f.replace('.yml',''));
+const themesDir = path.join(process.cwd(), "themes/");
+const themes = fs.readdirSync(themesDir).map((f) => f.replace(".yml", ""));
 const themePrompts = {
-  type: 'list',
-  name: 'theme',
-  message: 'Select a theme:',
-  choices: themes
+  type: "list",
+  name: "theme",
+  message: "Select a theme:",
+  choices: themes,
 };
 
 function main() {
@@ -21,4 +22,3 @@ function main() {
 }
 
 main();
-
