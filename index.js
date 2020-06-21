@@ -9,7 +9,7 @@ const ymlPath = path.resolve(
 );
 
 function updateTheme(data, theme) {
-  const themePath = path.join(process.cwd(), `themes/${theme}.yml`);
+  const themePath = path.join(__dirname, `themes/${theme}.yml`);
   const themeFile = fs.readFileSync(themePath, "utf8");
 
   const doc = YAML.parseDocument(data);

@@ -5,7 +5,7 @@ const path = require("path");
 const applyTheme = require("../index");
 const inquirer = require("inquirer");
 
-const themesDir = path.join(process.cwd(), "themes/");
+const themesDir = path.join(__dirname, "themes/");
 const themes = fs.readdirSync(themesDir).map((f) => f.replace(".yml", ""));
 const themePrompts = {
   type: "list",
