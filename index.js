@@ -4,6 +4,7 @@ const path = require("path");
 const inquirer = require("inquirer");
 const { Pair } = require("yaml/types");
 
+// alacritty.yml path
 const ymlPath = path.resolve(
   process.env.HOME,
   ".config/alacritty/alacritty.yml"
@@ -17,16 +18,20 @@ function updateTheme(data, theme) {
 
   const themeDoc = YAML.parseDocument(themeFile);
 
+  // Find the colors key in user's alacritty.yml
   const colors = doc.contents.items.filter((i) => i.key.value === "colors")[0];
 
+  // Find the colors key in theme.yml
   const themeColors = themeDoc.contents.items.filter(
     (i) => i.key.value === "colors"
   )[0];
 
   // colors key is commented out or not available
   if (!colors) {
+    // Create new colors key and assign value from theme
     doc.contents.items.push(new Pair("colors", themeColors.value));
   } else {
+    // Update colors key
     colors.value = themeColors.value;
   }
 
@@ -55,7 +60,7 @@ module.exports = function (theme) {
 
           const homeDir = path.join(process.env.HOME, ".config/alacritty/");
 
-          // If .config/alacritty doesn't exists, create one
+          // If .config/alacritty folder doesn't exists, create one
           if (!fs.existsSync(homeDir)) {
             fs.mkdirSync(homeDir);
           }
