@@ -2,6 +2,7 @@ const YAML = require("yaml");
 const fs = require("fs");
 const path = require("path");
 const inquirer = require("inquirer");
+const { Pair } = require("yaml/types");
 
 const ymlPath = path.resolve(
   process.env.HOME,
@@ -17,11 +18,17 @@ function updateTheme(data, theme) {
   const themeDoc = YAML.parseDocument(themeFile);
 
   const colors = doc.contents.items.filter((i) => i.key.value === "colors")[0];
+
   const themeColors = themeDoc.contents.items.filter(
     (i) => i.key.value === "colors"
   )[0];
 
-  colors.value = themeColors.value;
+  // colors key is commented out or not available
+  if (!colors) {
+    doc.contents.items.push(new Pair("colors", themeColors.value));
+  } else {
+    colors.value = themeColors.value;
+  }
 
   const newContent = String(doc);
 
