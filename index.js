@@ -55,7 +55,7 @@ module.exports = function (theme) {
 
       inquirer.prompt(createConfigPrompt).then((answers) => {
         if (answers.createConfig) {
-          const templatePath = path.join(process.cwd(), "alacritty.yml");
+          const templatePath = path.join(__dirname, "alacritty.yml");
           const configTemplate = fs.readFileSync(templatePath, "utf8");
 
           const homeDir = path.join(process.env.HOME, ".config/alacritty/");
