@@ -5,10 +5,15 @@ const inquirer = require("inquirer");
 const { Pair } = require("yaml/types");
 
 // alacritty.yml path
-const ymlPath = path.resolve(
-  process.env.HOME,
-  ".config/alacritty/alacritty.yml"
-);
+const ymlPath = (process.env.OS === "Windows_NT")
+  ? path.resolve(
+    process.env.APPDATA,
+    "alacritty/alacritty.yml"
+  )
+  : path.resolve(
+    process.env.HOME,
+    ".config/alacritty/alacritty.yml"
+  );
 
 function updateTheme(data, theme) {
   const themePath = path.join(__dirname, `themes/${theme}.yml`);
@@ -58,7 +63,9 @@ module.exports = function (theme) {
           const templatePath = path.join(__dirname, "alacritty.yml");
           const configTemplate = fs.readFileSync(templatePath, "utf8");
 
-          const homeDir = path.join(process.env.HOME, ".config/alacritty/");
+          const homeDir = (process.env.OS === "Windows_NT")
+            ? path.join(process.env.APPDATA, "alacritty/")
+            : path.join(process.env.HOME, ".config/alacritty/");
 
           // If .config/alacritty folder doesn't exists, create one
           if (!fs.existsSync(homeDir)) {
