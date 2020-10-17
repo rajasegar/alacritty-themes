@@ -7,7 +7,8 @@ const {
   alacrittyConfigDir,
   alacrittyConfigPath,
   getThemeYmlPath,
-  getColors
+  getColors,
+  getThemeName
 } = require("./utils");
 
 
@@ -70,6 +71,20 @@ function applyTheme(theme) {
   });
 }
 
+function getCurrentTheme() {
+  const data = fs.readFileSync(alacrittyConfigPath, "utf-8");
+  const doc = YAML.parseDocument(data);
+  const theme = getThemeName(doc);
+  if (theme === undefined) {
+    console.warn("Unable to determine current theme");
+    return ""
+  }
+
+  console.info(`Current theme: ${theme}`);
+  return theme;
+}
+
 module.exports = {
-  applyTheme: applyTheme
+  applyTheme: applyTheme,
+  getCurrentTheme: getCurrentTheme
 };

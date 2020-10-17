@@ -18,10 +18,25 @@ function getColors(doc) {
   return doc.contents.items.filter((i) => i.key.value === "colors")[0];
 }
 
+// Get theme name from colors
+function getThemeName(doc) {
+  const colors = getColors(doc);
+  const matchingPairs = colors.value.items.filter((i) => i.key.value == "name");
+  if(matchingPairs.length == 0) {
+    return;
+  }
+  const valueScalar = matchingPairs[0].value;
+  if (valueScalar === null) {
+    return;
+  }
+  return valueScalar.value;
+}
+
 module.exports = {
   alacrittyConfigDir: alacrittyConfigDir,
   alacrittyConfigPath: alacrittyConfigPath,
   getThemeYmlPath: getThemeYmlPath,
-  getColors: getColors
+  getColors: getColors,
+  getThemeName: getThemeName
 };
 

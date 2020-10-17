@@ -2,7 +2,7 @@
 
 const fs = require("fs");
 const path = require("path");
-const { applyTheme } = require("../index");
+const { getCurrentTheme, applyTheme } = require("../index");
 const inquirer = require("inquirer");
 const fuzzy = require("fuzzy");
 
@@ -13,6 +13,7 @@ const themePrompts = {
   name: "theme",
   message: "Select a theme:",
   source: searchThemes,
+  default: getCurrentTheme()
 };
 
 function searchThemes(answers, input) {
