@@ -2,7 +2,7 @@
 
 const fs = require("fs");
 const path = require("path");
-const applyTheme = require("../index");
+const { applyTheme } = require("../index");
 const inquirer = require("inquirer");
 const fuzzy = require("fuzzy");
 
