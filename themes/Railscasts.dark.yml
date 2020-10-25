@@ -1,5 +1,5 @@
 colors:
-  name: Railscasts (dark)
+  name: Railscasts.dark
   author: Chris Kempson
   primary:
     background: "#2b2b2b"

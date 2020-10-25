@@ -1,5 +1,5 @@
 colors:
-  name: Brewer (light)
+  name: Brewer.light
   author: Chris Kempson
   primary:
     background: "#fcfdfe"

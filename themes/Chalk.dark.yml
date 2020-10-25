@@ -1,5 +1,5 @@
 colors:
-  name: Chalk (dark)
+  name: Chalk.dark
   author: Chris Kempson
   primary:
     background: "#151515"

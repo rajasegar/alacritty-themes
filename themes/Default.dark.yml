@@ -1,5 +1,5 @@
 colors:
-  name: Default (dark)
+  name: Default.dark
   author: Chris Kempson
   primary:
     background: "#151515"
