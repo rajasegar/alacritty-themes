@@ -1,5 +1,5 @@
 colors:
-  name: Default (light)
+  name: Default.light
   author: Chris Kempson
   primary:
     background: "#f5f5f5"

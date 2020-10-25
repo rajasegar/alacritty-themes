@@ -1,5 +1,5 @@
 colors:
-  name: Brewer (dark)
+  name: Brewer.dark
   author: Chris Kempson
   primary:
     background: "#0c0d0e"

@@ -1,5 +1,5 @@
 colors:
-  name: Chalk (light)
+  name: Chalk.light
   author: Chris Kempson
   primary:
     background: "#f5f5f5"
