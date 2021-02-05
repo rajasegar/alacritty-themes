@@ -45,15 +45,10 @@ The list of options are cycled through automatically so you can go to the last t
 by just pressing `up arrow` key.
 The search is fuzzy so you can enter any part of the theme name to search.
 
-If no `alacritty.yml` is found in your `$HOME` path, you to create one.
+If no `alacritty.yml` is found in your `$HOME` path, you can create one using the `--create` or `-c` option.
 
 ```
 alacritty-themes --create
-```
-
-or 
-```
-alacritty-themes -c
 ```
 
 ## Bonus Tip: Alias
