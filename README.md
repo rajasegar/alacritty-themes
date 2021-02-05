@@ -1,4 +1,7 @@
 # :rainbow: alacritty-themes :lollipop:
+
+[![npm version](http://img.shields.io/npm/v/@rajasegar/alacritty-themes.svg?style=flat)](https://npmjs.org/package/@rajasegar/alacritty-themes "View this project on npm")
+
  Themes :candy: for [alacritty](https://github.com/alacritty/alacritty)  A cross-platform, GPU-accelerated terminal emulator 
 
 To find the list of themes, you can visit the alacritty [wiki page](https://github.com/alacritty/alacritty/wiki/Color-schemes)
