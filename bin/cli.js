@@ -1,40 +1,62 @@
 #!/usr/bin/env node
 
-const fs = require("fs");
-const path = require("path");
-const applyTheme = require("../index");
-const inquirer = require("inquirer");
-const fuzzy = require("fuzzy");
+const fs = require('fs');
+const path = require('path');
+const prompts = require('prompts');
+const temp = require('temp').track();
 
-const themesDir = path.join(__dirname, "..", "themes/");
-const themes = fs.readdirSync(themesDir).map((f) => f.replace(".yml", ""));
-const themePrompts = {
-  type: "autocomplete",
-  name: "theme",
-  message: "Select a theme:",
-  source: searchThemes,
-};
+const { applyTheme, createConfigFile, ymlPath } = require('../index');
 
-function searchThemes(answers, input) {
-  input = input || '';
-  return new Promise(function (resolve) {
-    setTimeout(function () {
-      var fuzzyResult = fuzzy.filter(input, themes);
-      resolve(
-        fuzzyResult.map(function (el) {
-          return el.original;
-        })
-      );
-    }, 100);
-  });
-}
+const themesDir = path.join(__dirname, '..', 'themes/');
+const themes = fs.readdirSync(themesDir).map((f) => f.replace('.yml', ''));
 
 function main() {
-  inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
-  inquirer.prompt(themePrompts).then((answers) => {
-    const { theme } = answers;
-    applyTheme(theme);
-  });
+  if (process.argv.length > 2) {
+    if (process.argv.includes('--create') || process.argv.includes('-c')) {
+      createConfigFile();
+    } else {
+      // the 3rd arg is theme name
+      applyTheme(process.argv[2]);
+    }
+  } else {
+    // Copy original config to new file
+    //
+    const tempDir = temp.mkdirSync('alacritty-themes');
+    const backupPath = path.join(tempDir, 'alacritty.yml');
+    /* eslint-disable */
+    fs.copyFile(ymlPath, backupPath, (err) => {
+      if (err) throw err;
+    });
+    /* eslint-enable */
+
+    (async () => {
+      const response = await prompts({
+        type: 'autocomplete',
+        name: 'theme',
+        message: 'Select a theme',
+        choices: themes.map((t) => {
+          return {
+            title: t,
+            value: t,
+          };
+        }),
+        onState: (state) => {
+          applyTheme(state.value, true); // set preview true
+        },
+      });
+
+      if (response.theme) {
+        applyTheme(response.theme);
+      } else {
+        // Restore original config
+        fs.readFile(backupPath, 'utf8', (err, data) => {
+          fs.writeFile(ymlPath, data, 'utf8', (err2) => {
+            if (err2) throw err2;
+          });
+        });
+      }
+    })();
+  }
 }
 
 main();

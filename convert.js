@@ -1,6 +1,6 @@
 'use strict';
 
-// this is the conversion script to 
+// this is the conversion script to
 // convert the themes in terminal.sexy repo
 // from json to yml
 const yaml = require('yaml');
@@ -10,17 +10,17 @@ const path = require('path');
 
 console.log('Convert yml to js');
 
-const base16 = path.resolve('../terminal.sexy/dist/schemes/base16'); 
-const collection = path.resolve('../terminal.sexy/dist/schemes/collection'); 
-const xcolors = path.resolve('../terminal.sexy/dist/schemes/xcolors.net'); 
+const base16 = path.resolve('../terminal.sexy/dist/schemes/base16');
+const collection = path.resolve('../terminal.sexy/dist/schemes/collection');
+const xcolors = path.resolve('../terminal.sexy/dist/schemes/xcolors.net');
 const folders = [base16, collection, xcolors];
 //console.log(folder);
 
-folders.forEach(folder => {
-  fs.readdir(folder, (err,files) => {
-    if(err) throw err;
+folders.forEach((folder) => {
+  fs.readdir(folder, (err, files) => {
+    if (err) throw err;
     console.log(files);
-    files.forEach(f => {
+    files.forEach((f) => {
       const data = fs.readFileSync(`${folder}/${f}`, 'utf8');
       const json = JSON.parse(data);
       const newJson = {
@@ -54,21 +54,19 @@ folders.forEach(folder => {
             magenta: json.color[13],
             cyan: json.color[14],
             white: json.color[15],
-          }
-
-        }
+          },
+        },
       };
       const output = yaml.stringify(newJson);
       const _baseName = path.basename(f, '.json');
       const fileName = _baseName[0].toUpperCase() + _baseName.slice(1) + '.yml';
       const ymlFile = 'themes/' + fileName;
-      if(!fs.existsSync(ymlFile)) {
-        fs.writeFile(ymlFile, output, (err, data) => {
-          if(err) throw err;
+      if (!fs.existsSync(ymlFile)) {
+        fs.writeFile(ymlFile, output, (err) => {
+          if (err) throw err;
           console.log(`${ymlFile} written successfully.`);
         });
       }
     });
-
   });
 });
