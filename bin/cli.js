@@ -2,39 +2,42 @@
 
 const fs = require("fs");
 const path = require("path");
-const applyTheme = require("../index");
-const inquirer = require("inquirer");
-const fuzzy = require("fuzzy");
+const prompts = require('prompts');
+
+const { applyTheme, getPrevTheme,restoreColors  } = require("../index");
 
 const themesDir = path.join(__dirname, "..", "themes/");
 const themes = fs.readdirSync(themesDir).map((f) => f.replace(".yml", ""));
-const themePrompts = {
-  type: "autocomplete",
-  name: "theme",
-  message: "Select a theme:",
-  source: searchThemes,
-};
 
-function searchThemes(answers, input) {
-  input = input || '';
-  return new Promise(function (resolve) {
-    setTimeout(function () {
-      var fuzzyResult = fuzzy.filter(input, themes);
-      resolve(
-        fuzzyResult.map(function (el) {
-          return el.original;
-        })
-      );
-    }, 100);
-  });
-}
+
 
 function main() {
-  inquirer.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
-  inquirer.prompt(themePrompts).then((answers) => {
-    const { theme } = answers;
-    applyTheme(theme);
-  });
+  const oldColors  = getPrevTheme();
+
+  (async () => {
+    const response = await prompts({
+      type: 'autocomplete',
+      name: 'theme',
+      message: 'Select a theme',
+      choices: themes.map(t => {
+        return {
+          title: t,
+          value: t
+        };
+      }),
+      onState: (state) => {
+        applyTheme(state.value, true); // set preview true
+      }
+    });
+
+    if(response.theme) {
+      applyTheme(response.theme);
+    } else {
+      // User cancelled the selection, so restore to old colors
+      restoreColors(oldColors);
+    }
+
+  })();
 }
 
 main();
