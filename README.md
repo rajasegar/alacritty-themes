@@ -6,7 +6,9 @@
 
 To find the list of themes, you can visit the alacritty [wiki page](https://github.com/alacritty/alacritty/wiki/Color-schemes)
 
+- Live preview the themes
 - 150+ Themes to choose from
+- Apply any theme with just one command at the terminal
 - Option to create your `alacritty.yml` config file
 - Simple, Easy and intuitive User experience
 
@@ -29,16 +31,30 @@ npx alacritty-themes
 alacritty-themes
 ```
 
+To apply a theme directly, provide the theme name as an option
+```
+alacritty-themes Dracula
+```
+
+To find the themes, you can check the file names  [here](/themes)
+
 ![alacritty-themes demo gif](demo.gif)
 
 Choose the theme from the list of options by typing the theme name and press `Enter` to apply.
-You can also navigate with `j` and `k` keys for up/down. The list of
-options are cycled through automatically so you can go to the last theme
+The list of options are cycled through automatically so you can go to the last theme
 by just pressing `up arrow` key.
 The search is fuzzy so you can enter any part of the theme name to search.
 
-If no `alacritty.yml` is found in your `$HOME` path, it will ask you to create one.
-You can choose to create one by confirming (`y/n`) and apply the selected theme.
+If no `alacritty.yml` is found in your `$HOME` path, you to create one.
+
+```
+alacritty-themes --create
+```
+
+or 
+```
+alacritty-themes -c
+```
 
 ## Bonus Tip: Alias
 You can also create an alias for `alacritty-themes` like `at` 
