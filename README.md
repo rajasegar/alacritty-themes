@@ -1,6 +1,6 @@
 # :rainbow: alacritty-themes :lollipop:
 
-[![npm version](http://img.shields.io/npm/v/@rajasegar/alacritty-themes.svg?style=flat)](https://npmjs.org/package/@rajasegar/alacritty-themes "View this project on npm")
+[![npm version](http://img.shields.io/npm/v/alacritty-themes.svg?style=flat)](https://npmjs.org/package/alacritty-themes "View this project on npm")
 
  Themes :candy: for [alacritty](https://github.com/alacritty/alacritty)  A cross-platform, GPU-accelerated terminal emulator 
 
