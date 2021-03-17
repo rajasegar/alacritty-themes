@@ -41,7 +41,7 @@ function main() {
           };
         }),
         onState: (state) => {
-          applyTheme(state.value, true); // set preview true
+          state.value && applyTheme(state.value, true); // set preview true
         },
       });
 
