@@ -3,11 +3,47 @@ const fs = require('fs');
 const path = require('path');
 const { Pair } = require('yaml/types');
 
+function getAlacrittyConfig() {
+  // pick the correct config file or handle errors, if it doesn't exist
+  function findExistingFile(files) {
+    for (let configPath of files)
+      if (path.existsSync(configPath)) return configPath;
+
+    throw new Error(
+      'No configuration file for alacritty found. Expected one of the following files to exist:\n' +
+        possibleLocations.join('\n')
+    );
+  }
+
+  // Windows Path is easily decided
+  if (process.env.OS === 'Windows_NT')
+    return findExistingFile(
+      path.resolve(process.env.APPDATA, 'alacritty/alacritty.yml')
+    );
+
+  const xdgHome = process.env.XDG_CONFIG_HOME;
+
+  // locations where the alacritty config can be located according to
+  // https://github.com/alacritty/alacritty#configuration
+  const possibleLocations = [
+    // only include the xdg based pathes, if the xdg variable was set
+    !Boolean(xdgHome)
+      ? []
+      : [
+          path.resolve(xdgHome, 'alacritty/alacritty.yml'),
+          path.resolve(xdgHome, 'alacritty.yml'),
+        ],
+    [
+      path.resolve(process.env.HOME, '.config/alacritty/alacritty.yml'),
+      path.resolve(process.env.HOME, '.alacritty.yml'),
+    ],
+  ].flat();
+
+  return findExistingFile(possibleLocations);
+}
+
 // alacritty.yml path
-const ymlPath =
-  process.env.OS === 'Windows_NT'
-    ? path.resolve(process.env.APPDATA, 'alacritty/alacritty.yml')
-    : path.resolve(process.env.HOME, '.config/alacritty/alacritty.yml');
+const ymlPath = getAlacrittyConfig();
 
 function createConfigFile() {
   const templatePath = path.join(__dirname, 'alacritty.yml');
