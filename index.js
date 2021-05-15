@@ -7,7 +7,7 @@ function getAlacrittyConfig() {
   // pick the correct config file or handle errors, if it doesn't exist
   function findExistingFile(files) {
     for (let configPath of files)
-      if (path.existsSync(configPath)) return configPath;
+      if (fs.existsSync(configPath)) return configPath;
 
     throw new Error(
       'No configuration file for alacritty found. Expected one of the following files to exist:\n' +
