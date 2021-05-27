@@ -88,7 +88,7 @@ function updateTheme(data, theme, preview = false) {
     colors.value = themeColors.value;
   }
 
-  const newContent = String(doc);
+  const newContent = YAML.stringify(doc);
 
   fs.writeFile(ymlPath, newContent, 'utf8', (err) => {
     if (err) throw err;
