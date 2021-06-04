@@ -32,11 +32,11 @@ describe('Alacritty Themes', () => {
       'alacritty.yml': configTemplate,
     };
     mockDir[`${homeDir}/.config`] = { alacritty: {} };
-    process.env.CI && mock(mockDir);
+    !process.env.CI && mock(mockDir);
     createConfigFile();
     const ymlPath = getAlacrittyConfig();
     assert.equal(ymlPath, `${homeDir}/.config/alacritty/alacritty.yml`);
-    process.env.CI && mock.restore();
+    !process.env.CI && mock.restore();
   });
 
   it('should set the correct theme colors', async () => {
@@ -59,7 +59,7 @@ describe('Alacritty Themes', () => {
     };
 
     mockDir[`${homeDir}/.config`] = { alacritty: {} };
-    process.env.CI && mock(mockDir);
+    !process.env.CI && mock(mockDir);
     createConfigFile();
     const ymlPath = getAlacrittyConfig();
     await applyTheme('Dracula');
@@ -75,6 +75,6 @@ describe('Alacritty Themes', () => {
     const themePrimaryBg =
       themeColors.value.items[0].value.items[0].value.value;
     assert.equal(primaryBg, themePrimaryBg);
-    process.env.CI && mock.restore();
+    !process.env.CI && mock.restore();
   });
 });
