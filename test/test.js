@@ -9,7 +9,7 @@ const YAML = require('yaml');
 
 const {
   getAlacrittyConfig,
-  //noConfigErr,
+  noConfigErr,
   createConfigFile,
   applyTheme,
 } = require('../');
@@ -17,13 +17,11 @@ const {
 const homeDir = process.env.HOME;
 
 describe('Alacritty Themes', () => {
-  /*
   it('should not have a config file by default', () => {
     mock();
     assert.throws(() => getAlacrittyConfig(), noConfigErr);
     mock.restore();
   });
-  */
 
   it('should have a config file after creating it', async () => {
     console.log(process.cwd());
@@ -62,7 +60,7 @@ describe('Alacritty Themes', () => {
 
     mockDir[`${homeDir}/.config`] = { alacritty: {} };
     !process.env.CI && mock(mockDir);
-    createConfigFile();
+    await createConfigFile();
     const ymlPath = getAlacrittyConfig();
     await applyTheme('Dracula');
     const newTemplate = fs.readFileSync(ymlPath, 'utf8');
