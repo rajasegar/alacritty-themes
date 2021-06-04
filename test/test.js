@@ -5,13 +5,13 @@ const assert = require('assert');
 const mock = require('mock-fs');
 const path = require('path');
 const fs = require('fs');
-//const YAML = require('yaml');
+const YAML = require('yaml');
 
 const {
   getAlacrittyConfig,
   //noConfigErr,
   createConfigFile,
-  //applyTheme,
+  applyTheme,
 } = require('../');
 
 const homeDir = process.env.HOME;
@@ -41,7 +41,6 @@ describe('Alacritty Themes', () => {
     mock.restore();
   });
 
-  /*
   it('should set the correct theme colors', async () => {
     const templatePath = path.join(process.cwd(), 'alacritty.yml');
     const configTemplate = fs.readFileSync(templatePath, 'utf8');
@@ -80,5 +79,4 @@ describe('Alacritty Themes', () => {
     assert.equal(primaryBg, themePrimaryBg);
     !process.env.CI && mock.restore();
   });
-  */
 });
