@@ -7,12 +7,12 @@ const path = require('path');
 const fs = require('fs');
 //const YAML = require('yaml');
 
-//const {
-//getAlacrittyConfig,
-//noConfigErr,
-//createConfigFile,
-//applyTheme,
-//} = require('../');
+const {
+  getAlacrittyConfig,
+  //noConfigErr,
+  createConfigFile,
+  //applyTheme,
+} = require('../');
 
 const homeDir = process.env.HOME;
 
@@ -25,7 +25,7 @@ describe('Alacritty Themes', () => {
   });
   */
 
-  it('should have a config file after creating it', () => {
+  it('should have a config file after creating it', async () => {
     console.log(process.cwd());
     const templatePath = path.join(process.cwd(), 'alacritty.yml');
     const configTemplate = fs.readFileSync(templatePath, 'utf8');
@@ -34,10 +34,10 @@ describe('Alacritty Themes', () => {
     };
     mockDir[`${homeDir}/.config`] = { alacritty: {} };
     mock(mockDir);
-    //createConfigFile();
-    //const ymlPath = getAlacrittyConfig();
-    //assert.equal(ymlPath, `${homeDir}/.config/alacritty/alacritty.yml`);
-    assert.ok(fs.existsSync('alacritty.yml'));
+    await createConfigFile();
+    const ymlPath = getAlacrittyConfig();
+    assert.equal(ymlPath, `${homeDir}/.config/alacritty/alacritty.yml`);
+    //assert.ok(fs.existsSync('alacritty.yml'));
     mock.restore();
   });
 

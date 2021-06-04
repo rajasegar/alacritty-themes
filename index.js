@@ -64,8 +64,13 @@ function createConfigFile() {
     fs.mkdirSync(homeDir);
   }
 
-  fs.writeFileSync(ymlPath, configTemplate, 'utf8');
-  console.log('New config file created.');
+  return writeFile(ymlPath, configTemplate, 'utf8')
+    .then(() => {
+      console.log('New config file created.');
+    })
+    .catch((err) => {
+      if (err) throw err;
+    });
 }
 
 function updateTheme(data, theme, preview = false) {
