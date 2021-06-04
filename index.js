@@ -123,4 +123,5 @@ module.exports = {
   applyTheme,
   ymlPath,
   createConfigFile,
+  getAlacrittyConfig,
 };

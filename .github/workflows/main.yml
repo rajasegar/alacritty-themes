@@ -1,0 +1,19 @@
+name: Build and Deploy
+on:
+  push:
+    branches:
+      - main
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
+    steps:
+    - uses: actions/checkout@v2
+    - uses: rwjblue/setup-volta@v1
+    - name: Install
+      run: yarn install
+    - name: ESLint
+      run: |
+        yarn lint
+        yarn test
