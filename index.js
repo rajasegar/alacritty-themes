@@ -47,9 +47,6 @@ function getAlacrittyConfig() {
   return findExistingFile(possibleLocations);
 }
 
-// alacritty.yml path
-const ymlPath = getAlacrittyConfig();
-
 function createConfigFile() {
   const templatePath = path.join(__dirname, 'alacritty.yml');
   const configTemplate = fs.readFileSync(templatePath, 'utf8');
@@ -64,7 +61,9 @@ function createConfigFile() {
     fs.mkdirSync(homeDir);
   }
 
-  return writeFile(ymlPath, configTemplate, 'utf8')
+  const configFile = `${homeDir}/alacritty.yml`;
+
+  return writeFile(configFile, configTemplate, 'utf8')
     .then(() => {
       console.log('New config file created.');
     })
@@ -73,7 +72,7 @@ function createConfigFile() {
     });
 }
 
-function updateTheme(data, theme, preview = false) {
+function updateTheme(data, theme, ymlPath, preview = false) {
   const themePath = path.join(__dirname, `themes/${theme}.yml`);
   const themeFile = fs.readFileSync(themePath, 'utf8');
 
@@ -112,14 +111,15 @@ function updateTheme(data, theme, preview = false) {
 }
 
 function applyTheme(theme, preview = false) {
+  // alacritty.yml path
+  const ymlPath = getAlacrittyConfig();
   return readFile(ymlPath, 'utf8').then((data) => {
-    return updateTheme(data, theme, preview);
+    return updateTheme(data, theme, ymlPath, preview);
   });
 }
 
 module.exports = {
   applyTheme,
-  ymlPath,
   createConfigFile,
   getAlacrittyConfig,
   noConfigErr,
