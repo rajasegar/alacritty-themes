@@ -6,6 +6,7 @@ specifiers:
   eslint-plugin-node: ^11.1.0
   eslint-plugin-prettier: ^3.3.1
   mocha: ^8.4.0
+  mock-fs: ^5.0.0
   prettier: ^2.2.1
   prompts: ^2.4.0
   temp: ^0.9.4
@@ -22,6 +23,7 @@ devDependencies:
   eslint-plugin-node: 11.1.0_eslint@7.19.0
   eslint-plugin-prettier: 3.3.1_ea5601adac11a59dc1e2379624986c36
   mocha: 8.4.0
+  mock-fs: 5.0.0
   prettier: 2.2.1
 
 packages:
@@ -837,6 +839,10 @@ packages:
       yargs: 16.2.0
       yargs-parser: 20.2.4
       yargs-unparser: 2.0.0
+    dev: true
+
+  /mock-fs/5.0.0:
+    resolution: {integrity: sha512-A5mm/SpSDwwc/klSaEvvKMGQQtiGiQy8UcDAd/vpVO1fV+4zaHjt39yKgCSErFzv2zYxZIUx9Ud/7ybeHBf8Fg==}
     dev: true
 
   /ms/2.1.2:

@@ -9,7 +9,7 @@
   "scripts": {
     "test": "mocha",
     "deploy": "git push && git push --tags && npm publish",
-    "lint": "eslint . --fix"
+    "lint": "eslint ."
   },
   "keywords": [
     "alacritty",
@@ -32,6 +32,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.3.1",
     "mocha": "^8.4.0",
+    "mock-fs": "^5.0.0",
     "prettier": "^2.2.1"
   }
 }

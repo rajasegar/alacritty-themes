@@ -1,7 +1,33 @@
 const YAML = require('yaml');
 const fs = require('fs');
+const util = require('util');
 const path = require('path');
 const { Pair } = require('yaml/types');
+
+const readFile = util.promisify(fs.readFile);
+const writeFile = util.promisify(fs.writeFile);
+
+const xdgHome = process.env.XDG_CONFIG_HOME;
+let possibleLocations = [];
+
+// locations where the alacritty config can be located according to
+// https://github.com/alacritty/alacritty#configuration
+if (xdgHome) {
+  possibleLocations.concat([
+    path.resolve(xdgHome, 'alacritty/alacritty.yml'),
+    path.resolve(xdgHome, 'alacritty.yml'),
+  ]);
+}
+
+possibleLocations.push(
+  path.resolve(process.env.HOME, '.config/alacritty/alacritty.yml')
+);
+possibleLocations.push(path.resolve(process.env.HOME, '.alacritty.yml'));
+
+const noConfigErr = new Error(
+  'No configuration file for alacritty found. Expected one of the following files to exist:\n' +
+    possibleLocations.join('\n')
+);
 
 function getAlacrittyConfig() {
   // pick the correct config file or handle errors, if it doesn't exist
@@ -9,10 +35,7 @@ function getAlacrittyConfig() {
     for (let configPath of files)
       if (fs.existsSync(configPath)) return configPath;
 
-    throw new Error(
-      'No configuration file for alacritty found. Expected one of the following files to exist:\n' +
-        possibleLocations.join('\n')
-    );
+    throw noConfigErr;
   }
 
   // Windows Path is easily decided
@@ -20,38 +43,6 @@ function getAlacrittyConfig() {
     return findExistingFile(
       path.resolve(process.env.APPDATA, 'alacritty/alacritty.yml')
     );
-
-  const xdgHome = process.env.XDG_CONFIG_HOME;
-
-  // Compatibility for Node version < 11
-  // will remove in the next major release
-  Object.defineProperty(Array.prototype, 'flat', {
-    value: function (depth = 1) {
-      return this.reduce(function (flat, toFlatten) {
-        return flat.concat(
-          Array.isArray(toFlatten) && depth > 1
-            ? toFlatten.flat(depth - 1)
-            : toFlatten
-        );
-      }, []);
-    },
-  });
-
-  // locations where the alacritty config can be located according to
-  // https://github.com/alacritty/alacritty#configuration
-  const possibleLocations = [
-    // only include the xdg based pathes, if the xdg variable was set
-    !xdgHome
-      ? []
-      : [
-          path.resolve(xdgHome, 'alacritty/alacritty.yml'),
-          path.resolve(xdgHome, 'alacritty.yml'),
-        ],
-    [
-      path.resolve(process.env.HOME, '.config/alacritty/alacritty.yml'),
-      path.resolve(process.env.HOME, '.alacritty.yml'),
-    ],
-  ].flat();
 
   return findExistingFile(possibleLocations);
 }
@@ -104,18 +95,20 @@ function updateTheme(data, theme, preview = false) {
 
   const newContent = YAML.stringify(doc);
 
-  fs.writeFile(ymlPath, newContent, 'utf8', (err) => {
-    if (err) throw err;
-
-    if (!preview) {
-      console.log(`The theme ${theme} has been applied successfully!`);
-    }
-  });
+  return writeFile(ymlPath, newContent, 'utf8')
+    .then(() => {
+      if (!preview) {
+        console.log(`The theme ${theme} has been applied successfully!`);
+      }
+    })
+    .catch((err) => {
+      if (err) throw err;
+    });
 }
 
 function applyTheme(theme, preview = false) {
-  fs.readFile(ymlPath, 'utf8', (err, data) => {
-    updateTheme(data, theme, preview);
+  return readFile(ymlPath, 'utf8').then((data) => {
+    return updateTheme(data, theme, preview);
   });
 }
 
@@ -124,4 +117,5 @@ module.exports = {
   ymlPath,
   createConfigFile,
   getAlacrittyConfig,
+  noConfigErr,
 };
