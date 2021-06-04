@@ -35,7 +35,6 @@ describe('Alacritty Themes', () => {
     await createConfigFile();
     const ymlPath = getAlacrittyConfig();
     assert.equal(ymlPath, `${homeDir}/.config/alacritty/alacritty.yml`);
-    //assert.ok(fs.existsSync('alacritty.yml'));
     mock.restore();
   });
 
