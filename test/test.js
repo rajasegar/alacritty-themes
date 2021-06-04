@@ -28,17 +28,18 @@ describe('Alacritty Themes', () => {
   it('should have a config file after creating it', () => {
     const templatePath = path.join(process.cwd(), 'alacritty.yml');
     const configTemplate = fs.readFileSync(templatePath, 'utf8');
-    const mockDir = {
-      'alacritty.yml': configTemplate,
-    };
-    mockDir[`${homeDir}/.config`] = { alacritty: {} };
-    !process.env.CI && mock(mockDir);
+    //const mockDir = {
+      //'alacritty.yml': configTemplate,
+    //};
+    //mockDir[`${homeDir}/.config`] = { alacritty: {} };
+    //!process.env.CI && mock(mockDir);
     createConfigFile();
     const ymlPath = getAlacrittyConfig();
     assert.equal(ymlPath, `${homeDir}/.config/alacritty/alacritty.yml`);
-    !process.env.CI && mock.restore();
-  });
+    //!process.env.CI && mock.restore();
+  //});
 
+  /*
   it('should set the correct theme colors', async () => {
     const templatePath = path.join(process.cwd(), 'alacritty.yml');
     const configTemplate = fs.readFileSync(templatePath, 'utf8');
@@ -77,4 +78,5 @@ describe('Alacritty Themes', () => {
     assert.equal(primaryBg, themePrimaryBg);
     !process.env.CI && mock.restore();
   });
+  */
 });
