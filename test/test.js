@@ -2,16 +2,16 @@
 'use strict';
 
 const assert = require('assert');
-const mock = require('mock-fs');
-const path = require('path');
-const fs = require('fs');
-const YAML = require('yaml');
+//const mock = require('mock-fs');
+//const path = require('path');
+//const fs = require('fs');
+//const YAML = require('yaml');
 
 const {
   getAlacrittyConfig,
   //noConfigErr,
   createConfigFile,
-  applyTheme,
+  //applyTheme,
 } = require('../');
 
 const homeDir = process.env.HOME;
@@ -26,10 +26,10 @@ describe('Alacritty Themes', () => {
   */
 
   it('should have a config file after creating it', () => {
-    const templatePath = path.join(process.cwd(), 'alacritty.yml');
-    const configTemplate = fs.readFileSync(templatePath, 'utf8');
+    //const templatePath = path.join(process.cwd(), 'alacritty.yml');
+    //const configTemplate = fs.readFileSync(templatePath, 'utf8');
     //const mockDir = {
-      //'alacritty.yml': configTemplate,
+    //'alacritty.yml': configTemplate,
     //};
     //mockDir[`${homeDir}/.config`] = { alacritty: {} };
     //!process.env.CI && mock(mockDir);
@@ -37,7 +37,7 @@ describe('Alacritty Themes', () => {
     const ymlPath = getAlacrittyConfig();
     assert.equal(ymlPath, `${homeDir}/.config/alacritty/alacritty.yml`);
     //!process.env.CI && mock.restore();
-  //});
+  });
 
   /*
   it('should set the correct theme colors', async () => {
