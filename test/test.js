@@ -14,6 +14,8 @@ const {
   applyTheme,
 } = require('../');
 
+const homeDir = process.env.HOME;
+
 describe('Alacritty Themes', () => {
   it('should not have a config file by default', () => {
     mock();
@@ -24,12 +26,11 @@ describe('Alacritty Themes', () => {
   it('should have a config file after creating it', () => {
     const templatePath = path.join(process.cwd(), 'alacritty.yml');
     const configTemplate = fs.readFileSync(templatePath, 'utf8');
-    mock({
-      '/home/boot/.config': {
-        alacritty: {},
-      },
+    const mockDir = {
       'alacritty.yml': configTemplate,
-    });
+    };
+    mockDir[`${homeDir}/.config`] = { alacritty: {} };
+    mock(mockDir);
     createConfigFile();
     const ymlPath = getAlacrittyConfig();
     assert.equal(ymlPath, '/home/boot/.config/alacritty/alacritty.yml');
@@ -48,15 +49,15 @@ describe('Alacritty Themes', () => {
       (i) => i.key.value === 'colors'
     )[0];
 
-    mock({
-      '/home/boot/.config': {
-        alacritty: {},
-      },
+    const mockDir = {
       'alacritty.yml': configTemplate,
       themes: {
         'Dracula.yml': themeFile,
       },
-    });
+    };
+
+    mockDir[`${homeDir}/.config`] = { alacritty: {} };
+    mock(mockDir);
     createConfigFile();
     const ymlPath = getAlacrittyConfig();
     await applyTheme('Dracula');
