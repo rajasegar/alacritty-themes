@@ -23,11 +23,25 @@ function getAlacrittyConfig() {
 
   const xdgHome = process.env.XDG_CONFIG_HOME;
 
+  // Compatibility for Node version < 11
+  // will remove in the next major release
+  Object.defineProperty(Array.prototype, 'flat', {
+    value: function (depth = 1) {
+      return this.reduce(function (flat, toFlatten) {
+        return flat.concat(
+          Array.isArray(toFlatten) && depth > 1
+            ? toFlatten.flat(depth - 1)
+            : toFlatten
+        );
+      }, []);
+    },
+  });
+
   // locations where the alacritty config can be located according to
   // https://github.com/alacritty/alacritty#configuration
   const possibleLocations = [
     // only include the xdg based pathes, if the xdg variable was set
-    !Boolean(xdgHome)
+    !xdgHome
       ? []
       : [
           path.resolve(xdgHome, 'alacritty/alacritty.yml'),
