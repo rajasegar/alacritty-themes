@@ -14,6 +14,7 @@ const {
   applyTheme,
 } = require('../');
 
+console.log(process.env);
 const homeDir = process.env.HOME;
 
 describe('Alacritty Themes', () => {
