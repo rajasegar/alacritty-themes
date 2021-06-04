@@ -2,9 +2,9 @@
 'use strict';
 
 const assert = require('assert');
-//const mock = require('mock-fs');
-//const path = require('path');
-//const fs = require('fs');
+const mock = require('mock-fs');
+const path = require('path');
+const fs = require('fs');
 //const YAML = require('yaml');
 
 const {
@@ -26,17 +26,17 @@ describe('Alacritty Themes', () => {
   */
 
   it('should have a config file after creating it', () => {
-    //const templatePath = path.join(process.cwd(), 'alacritty.yml');
-    //const configTemplate = fs.readFileSync(templatePath, 'utf8');
-    //const mockDir = {
-    //'alacritty.yml': configTemplate,
-    //};
-    //mockDir[`${homeDir}/.config`] = { alacritty: {} };
-    //!process.env.CI && mock(mockDir);
+    const templatePath = path.join(process.cwd(), 'alacritty.yml');
+    const configTemplate = fs.readFileSync(templatePath, 'utf8');
+    const mockDir = {
+      'alacritty.yml': configTemplate,
+    };
+    mockDir[`${homeDir}/.config`] = { alacritty: {} };
+    mock(mockDir);
     createConfigFile();
     const ymlPath = getAlacrittyConfig();
     assert.equal(ymlPath, `${homeDir}/.config/alacritty/alacritty.yml`);
-    //!process.env.CI && mock.restore();
+    mock.restore();
   });
 
   /*
