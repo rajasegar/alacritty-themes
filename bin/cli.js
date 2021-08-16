@@ -5,7 +5,11 @@ const path = require('path');
 const prompts = require('prompts');
 const temp = require('temp').track();
 
-const { applyTheme, createConfigFile, ymlPath } = require('../index');
+const {
+  applyTheme,
+  createConfigFile,
+  getAlacrittyConfig,
+} = require('../index');
 
 const themesDir = path.join(__dirname, '..', 'themes/');
 const themes = fs.readdirSync(themesDir).map((f) => f.replace('.yml', ''));
@@ -23,11 +27,11 @@ function main() {
     //
     const tempDir = temp.mkdirSync('alacritty-themes');
     const backupPath = path.join(tempDir, 'alacritty.yml');
-    /* eslint-disable */
+
+    const ymlPath = getAlacrittyConfig();
     fs.copyFile(ymlPath, backupPath, (err) => {
       if (err) throw err;
     });
-    /* eslint-enable */
 
     (async () => {
       const response = await prompts({
