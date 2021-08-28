@@ -1,6 +1,8 @@
 name: Pull Requests
 on:
   pull_request:
+    branches:
+      - master
 
 jobs:
   lint:
@@ -12,14 +14,15 @@ jobs:
         node: ['12', '14', '16']
         os: [ubuntu-latest]
 
-
     if: "!contains(github.event.head_commit.message, 'skip ci')"
     steps:
     - uses: actions/checkout@v2
     - uses: rwjblue/setup-volta@v1
-    - name: Install
+    - name: Yarn Install
       run: yarn install
-    - name: ESLint
+    - name: Running ESLint
       run: |
         yarn lint
+    - name: Running tests
+      run: |
         yarn test
