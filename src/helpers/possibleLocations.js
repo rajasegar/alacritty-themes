@@ -34,6 +34,4 @@ function possibleLocations() {
   return locations;
 }
 
-module.exports = {
-  possibleLocations,
-};
+module.exports = possibleLocations;

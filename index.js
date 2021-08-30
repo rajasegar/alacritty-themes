@@ -4,7 +4,7 @@ const util = require('util');
 const path = require('path');
 const { Pair } = require('yaml/types');
 
-const { possibleLocations } = require('./bin/helpers');
+const { possibleLocations } = require('./src/helpers');
 
 const readFile = util.promisify(fs.readFile);
 const writeFile = util.promisify(fs.writeFile);
