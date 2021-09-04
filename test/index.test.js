@@ -7,19 +7,16 @@ const path = require('path');
 const fs = require('fs');
 const YAML = require('yaml');
 
-const {
-  getAlacrittyConfig,
-  noConfigErr,
-  createConfigFile,
-  applyTheme,
-} = require('../');
+const { getAlacrittyConfig, createConfigFile, applyTheme } = require('../');
+
+const { NoAlacrittyFileFoundError } = require('../src/helpers');
 
 const homeDir = process.env.HOME;
 
 describe('Alacritty Themes', () => {
   it('should not have a config file by default', () => {
     mock();
-    assert.throws(() => getAlacrittyConfig(), noConfigErr);
+    assert.throws(() => getAlacrittyConfig(), NoAlacrittyFileFoundError);
     mock.restore();
   });
 

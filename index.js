@@ -4,26 +4,22 @@ const util = require('util');
 const path = require('path');
 const { Pair } = require('yaml/types');
 
-const { possibleLocations } = require('./src/helpers');
+const {
+  alacrittyFileExists,
+  alacrittyConfigPath,
+  NoAlacrittyFileFoundError,
+} = require('./src/helpers');
 
 const readFile = util.promisify(fs.readFile);
 const writeFile = util.promisify(fs.writeFile);
 
-const noConfigErr = new Error(
-  'No configuration file for alacritty found. Expected one of the following files to exist:\n' +
-    possibleLocations().join('\n')
-);
-
+// pick the correct config file or handle errors, if it doesn't exist
 function getAlacrittyConfig() {
-  // pick the correct config file or handle errors, if it doesn't exist
-  function findExistingFile(files) {
-    for (let configPath of files)
-      if (fs.existsSync(configPath)) return configPath;
-
-    throw noConfigErr;
+  if (!alacrittyFileExists()) {
+    throw NoAlacrittyFileFoundError;
   }
 
-  return findExistingFile(possibleLocations());
+  return alacrittyConfigPath();
 }
 
 function createConfigFile() {
@@ -101,5 +97,4 @@ module.exports = {
   applyTheme,
   createConfigFile,
   getAlacrittyConfig,
-  noConfigErr,
 };
