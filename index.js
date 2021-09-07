@@ -5,9 +5,11 @@ const path = require('path');
 const { Pair } = require('yaml/types');
 
 const {
-  alacrittyFileExists,
-  alacrittyConfigPath,
   NoAlacrittyFileFoundError,
+  alacrittyConfigPath,
+  alacrittyFileExists,
+  alacrittyTemplatePath,
+  isWindows,
 } = require('./src/helpers');
 
 const readFile = util.promisify(fs.readFile);
@@ -23,13 +25,12 @@ function getAlacrittyConfig() {
 }
 
 function createConfigFile() {
-  const templatePath = path.join(__dirname, 'alacritty.yml');
+  const templatePath = alacrittyTemplatePath();
   const configTemplate = fs.readFileSync(templatePath, 'utf8');
 
-  const homeDir =
-    process.env.OS === 'Windows_NT'
-      ? path.join(process.env.APPDATA, 'alacritty/')
-      : path.join(process.env.HOME, '.config/alacritty/');
+  const homeDir = isWindows()
+    ? path.join(process.env.APPDATA, 'alacritty/')
+    : path.join(process.env.HOME, '.config/alacritty/');
 
   // If .config/alacritty folder doesn't exists, create one
   if (!fs.existsSync(homeDir)) {
