@@ -2,41 +2,45 @@
 'use strict';
 
 const assert = require('assert');
-const mock = require('mock-fs');
+const mockFs = require('mock-fs');
 const path = require('path');
 const fs = require('fs');
 const YAML = require('yaml');
 
 const { getAlacrittyConfig, createConfigFile, applyTheme } = require('../');
 
-const { NoAlacrittyFileFoundError } = require('../src/helpers');
+const {
+  NoAlacrittyFileFoundError,
+  alacrittyTemplatePath,
+  linuxHome,
+} = require('../src/helpers');
 
-const homeDir = process.env.HOME;
+const homeDir = linuxHome();
 
 describe('Alacritty Themes', () => {
   it('should not have a config file by default', () => {
-    mock();
+    mockFs();
     assert.throws(() => getAlacrittyConfig(), NoAlacrittyFileFoundError);
-    mock.restore();
+    mockFs.restore();
   });
 
   it('should have a config file after creating it', async () => {
     console.log(process.cwd());
-    const templatePath = path.join(process.cwd(), 'alacritty.yml');
+    const templatePath = alacrittyTemplatePath();
     const configTemplate = fs.readFileSync(templatePath, 'utf8');
     const mockDir = {
       'alacritty.yml': configTemplate,
     };
     mockDir[`${homeDir}/.config`] = { alacritty: {} };
-    mock(mockDir);
+    mockFs(mockDir);
     await createConfigFile();
     const ymlPath = getAlacrittyConfig();
-    assert.equal(ymlPath, `${homeDir}/.config/alacritty/alacritty.yml`);
-    mock.restore();
+    assert.strictEqual(ymlPath, `${homeDir}/.config/alacritty/alacritty.yml`);
+    mockFs.restore();
   });
 
   it('should set the correct theme colors', async () => {
-    const templatePath = path.join(process.cwd(), 'alacritty.yml');
+    const templatePath = alacrittyTemplatePath();
     const configTemplate = fs.readFileSync(templatePath, 'utf8');
 
     const themePath = path.join(process.cwd(), `themes/Dracula.yml`);
@@ -55,7 +59,7 @@ describe('Alacritty Themes', () => {
     };
 
     mockDir[`${homeDir}/.config`] = { alacritty: {} };
-    !process.env.CI && mock(mockDir);
+    !process.env.CI && mockFs(mockDir);
     await createConfigFile();
     const ymlPath = getAlacrittyConfig();
     await applyTheme('Dracula');
@@ -70,7 +74,7 @@ describe('Alacritty Themes', () => {
     const primaryBg = colors.value.items[0].value.items[0].value.value;
     const themePrimaryBg =
       themeColors.value.items[0].value.items[0].value.value;
-    assert.equal(primaryBg, themePrimaryBg);
-    !process.env.CI && mock.restore();
+    assert.strictEqual(primaryBg, themePrimaryBg);
+    !process.env.CI && mockFs.restore();
   });
 });
