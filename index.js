@@ -53,6 +53,10 @@ function updateTheme(data, theme, ymlPath, preview = false) {
   const themeFile = fs.readFileSync(themePath, 'utf8');
 
   const doc = YAML.parseDocument(data);
+  // If config file is empty
+  if (doc.contents === null) {
+    doc.contents = { items: [] };
+  }
 
   const themeDoc = YAML.parseDocument(themeFile);
 
