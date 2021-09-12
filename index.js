@@ -1,6 +1,5 @@
 const YAML = require('yaml');
 const fs = require('fs');
-const util = require('util');
 const path = require('path');
 const { Pair } = require('yaml/types');
 
@@ -8,12 +7,11 @@ const {
   NoAlacrittyFileFoundError,
   alacrittyConfigPath,
   alacrittyFileExists,
-  alacrittyTemplatePath,
-  isWindows,
+  alacrittyTemplateContent,
+  useUserAlacrittyPath,
+  readFile,
+  writeFile,
 } = require('./src/helpers');
-
-const readFile = util.promisify(fs.readFile);
-const writeFile = util.promisify(fs.writeFile);
 
 // pick the correct config file or handle errors, if it doesn't exist
 function getAlacrittyConfig() {
@@ -24,28 +22,17 @@ function getAlacrittyConfig() {
   return alacrittyConfigPath();
 }
 
-function createConfigFile() {
-  const templatePath = alacrittyTemplatePath();
-  const configTemplate = fs.readFileSync(templatePath, 'utf8');
+async function createConfigFile() {
+  const template = alacrittyTemplateContent();
+  const alacrittyPath = useUserAlacrittyPath();
+  const newAlacrittyFile = `${alacrittyPath}alacritty.yml`;
 
-  const homeDir = isWindows()
-    ? path.join(process.env.APPDATA, 'alacritty/')
-    : path.join(process.env.HOME, '.config/alacritty/');
-
-  // If .config/alacritty folder doesn't exists, create one
-  if (!fs.existsSync(homeDir)) {
-    fs.mkdirSync(homeDir);
+  try {
+    await writeFile(newAlacrittyFile, template);
+    console.log(`Alacritty file was created: ${newAlacrittyFile}`);
+  } catch (e) {
+    if (e) throw e;
   }
-
-  const configFile = `${homeDir}/alacritty.yml`;
-
-  return writeFile(configFile, configTemplate, 'utf8')
-    .then(() => {
-      console.log('New config file created.');
-    })
-    .catch((err) => {
-      if (err) throw err;
-    });
 }
 
 function updateTheme(data, theme, ymlPath, preview = false) {

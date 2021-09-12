@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const promisify = require('util').promisify;
 
 const NoAlacrittyFileFoundError = new Error(
   'No Alacritty configuration file found. Expected one of the following files to exist:\n' +
@@ -26,8 +27,40 @@ function archHome() {
   return process.env.XDG_CONFIG_HOME;
 }
 
+function windowsAlacrittyPath() {
+  return path.join(windowsHome(), 'alacritty/');
+}
+
+function linuxAlacrittyPath() {
+  return path.join(linuxHome(), '.config/alacritty/');
+}
+
+function userAlacrittyPathExist() {
+  return fs.existsSync(userAlacrittyPath());
+}
+
+function userAlacrittyPath() {
+  return isWindows() ? windowsAlacrittyPath() : linuxAlacrittyPath();
+}
+
+function useUserAlacrittyPath() {
+  if (userAlacrittyPathExist()) {
+    return userAlacrittyPath();
+  } else {
+    return createUserAlacrittyPath();
+  }
+}
+
+function createUserAlacrittyPath() {
+  return fs.mkdirSync(userAlacrittyPath());
+}
+
 function alacrittyTemplatePath() {
   return path.join(rootDir(), 'alacritty.yml');
+}
+
+function alacrittyTemplateContent() {
+  return fs.readFileSync(alacrittyTemplatePath(), 'utf8');
 }
 
 function alacrittyFileExists() {
@@ -72,11 +105,15 @@ module.exports = {
   NoAlacrittyFileFoundError,
   alacrittyConfigPath,
   alacrittyFileExists,
+  alacrittyTemplateContent,
   alacrittyTemplatePath,
   archHome,
   isWindows,
   linuxHome,
   possibleLocations,
   rootDir,
+  useUserAlacrittyPath,
   windowsHome,
+  readFile: promisify(fs.readFile),
+  writeFile: promisify(fs.writeFile),
 };
