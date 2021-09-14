@@ -10,6 +10,7 @@ const {
   alacrittyFileExists,
   alacrittyTemplatePath,
   isWindows,
+  themeFilePath,
 } = require('./src/helpers');
 
 const readFile = util.promisify(fs.readFile);
@@ -49,7 +50,7 @@ function createConfigFile() {
 }
 
 function updateTheme(data, theme, ymlPath, preview = false) {
-  const themePath = path.join(__dirname, `themes/${theme}.yml`);
+  const themePath = themeFilePath(theme);
   const themeFile = fs.readFileSync(themePath, 'utf8');
 
   const doc = YAML.parseDocument(data);
