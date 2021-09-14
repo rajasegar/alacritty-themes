@@ -1,6 +1,6 @@
 const YAML = require('yaml');
 const fs = require('fs');
-const util = require('util');
+const fsPromises = fs.promises;
 const path = require('path');
 const { Pair } = require('yaml/types');
 
@@ -11,9 +11,6 @@ const {
   alacrittyTemplatePath,
   isWindows,
 } = require('./src/helpers');
-
-const readFile = util.promisify(fs.readFile);
-const writeFile = util.promisify(fs.writeFile);
 
 // pick the correct config file or handle errors, if it doesn't exist
 function getAlacrittyConfig() {
@@ -39,7 +36,8 @@ function createConfigFile() {
 
   const configFile = `${homeDir}/alacritty.yml`;
 
-  return writeFile(configFile, configTemplate, 'utf8')
+  return fsPromises
+    .writeFile(configFile, configTemplate, 'utf8')
     .then(() => {
       console.log('New config file created.');
     })
@@ -79,7 +77,8 @@ function updateTheme(data, theme, ymlPath, preview = false) {
 
   const newContent = YAML.stringify(doc);
 
-  return writeFile(ymlPath, newContent, 'utf8')
+  return fsPromises
+    .writeFile(ymlPath, newContent, 'utf8')
     .then(() => {
       if (!preview) {
         console.log(`The theme ${theme} has been applied successfully!`);
@@ -93,7 +92,7 @@ function updateTheme(data, theme, ymlPath, preview = false) {
 function applyTheme(theme, preview = false) {
   // alacritty.yml path
   const ymlPath = getAlacrittyConfig();
-  return readFile(ymlPath, 'utf8').then((data) => {
+  return fsPromises.readFile(ymlPath, 'utf8').then((data) => {
     return updateTheme(data, theme, ymlPath, preview);
   });
 }
