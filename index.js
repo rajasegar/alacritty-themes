@@ -10,6 +10,7 @@ const {
   alacrittyFileExists,
   alacrittyTemplatePath,
   isWindows,
+  themeFilePath,
 } = require('./src/helpers');
 
 // pick the correct config file or handle errors, if it doesn't exist
@@ -47,7 +48,7 @@ function createConfigFile() {
 }
 
 function updateTheme(data, theme, ymlPath, preview = false) {
-  const themePath = path.join(__dirname, `themes/${theme}.yml`);
+  const themePath = themeFilePath(theme);
   const themeFile = fs.readFileSync(themePath, 'utf8');
 
   const doc = YAML.parseDocument(data);

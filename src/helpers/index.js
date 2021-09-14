@@ -10,6 +10,10 @@ function rootDir() {
   return process.env.PWD;
 }
 
+function themeFilePath(themeName) {
+  return path.join(rootDir(), `themes/${themeName}.yml`);
+}
+
 function isWindows() {
   return process.env.OS === 'Windows_NT';
 }
@@ -78,5 +82,6 @@ module.exports = {
   linuxHome,
   possibleLocations,
   rootDir,
+  themeFilePath,
   windowsHome,
 };
