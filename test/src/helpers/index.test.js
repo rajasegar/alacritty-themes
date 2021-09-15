@@ -1,21 +1,51 @@
 /* globals describe it */
 const assert = require('assert');
 const mockedEnv = require('mocked-env');
+const mockFs = require('mock-fs');
+const fs = require('fs');
 
 const {
-  possibleLocations,
-  rootDir,
+  archHome,
   isWindows,
   linuxHome,
-  archHome,
+  possibleLocations,
+  rootDirectory,
+  themeFilePath,
 } = require('../../../src/helpers');
 
-describe('rootDir', () => {
+describe('rootDirectory', () => {
   it('returns the alacritty-themes root directory', () => {
-    let alacrittyThemesRootDir = '/home/rajasegar/alacritty-themes';
-    let restore = mockedEnv({ PWD: alacrittyThemesRootDir });
+    let alacrittyThemeDirectory = '/home/rajasegar/alacritty-themes';
+    let restore = mockedEnv({ PWD: alacrittyThemeDirectory });
 
-    assert(rootDir(), alacrittyThemesRootDir);
+    assert(rootDirectory(), alacrittyThemeDirectory);
+    restore();
+  });
+});
+
+describe('themeFilePath', () => {
+  it('returns a theme file', () => {
+    let alacrittyThemeDirectory = '/home/rajasegar/alacritty-themes';
+    let restore = mockedEnv({ PWD: alacrittyThemeDirectory });
+    mockFs({
+      'TokyoNight_Storm.yml': '# TokyoNight Alacritty Colors',
+    });
+
+    assert.strictEqual(
+      themeFilePath('TokyoNight_Storm'),
+      `${alacrittyThemeDirectory}/themes/TokyoNight_Storm.yml`
+    );
+    restore();
+  });
+
+  it('does not return a theme file', () => {
+    let alacrittyThemeDirectory = '/home/rajasegar/alacritty-themes';
+    let restore = mockedEnv({ PWD: alacrittyThemeDirectory });
+    mockFs({
+      'TokyoNight_Storm.yml': '# TokyoNight Alacritty Colors',
+    });
+
+    assert.strictEqual(fs.existsSync(themeFilePath('Dracula')), false);
     restore();
   });
 });
@@ -64,12 +94,13 @@ describe('possibleLocations', () => {
   });
 
   it('returns Linux possible locations', () => {
-    let restore = mockedEnv({ HOME: '/home/rajasegar' });
+    let home = '/home/rajasegar';
+    let restore = mockedEnv({ HOME: home });
     let locations = possibleLocations();
 
     assert(locations, [
-      '/home/rajasegar/.config/alacritty/alacritty.yml',
-      '/home/rajasegar/.config/.alacritty.yml',
+      `${home}/.config/alacritty/alacritty.yml`,
+      `${home}/.config/.alacritty.yml`,
     ]);
     restore();
   });

@@ -6,12 +6,12 @@ const NoAlacrittyFileFoundError = new Error(
     possibleLocations().join('\n')
 );
 
-function rootDir() {
+function rootDirectory() {
   return process.env.PWD;
 }
 
 function themeFilePath(themeName) {
-  return path.join(rootDir(), `themes/${themeName}.yml`);
+  return path.join(rootDirectory(), `themes/${themeName}.yml`);
 }
 
 function isWindows() {
@@ -31,7 +31,7 @@ function archHome() {
 }
 
 function alacrittyTemplatePath() {
-  return path.join(rootDir(), 'alacritty.yml');
+  return path.join(rootDirectory(), 'alacritty.yml');
 }
 
 function alacrittyFileExists() {
@@ -81,7 +81,7 @@ module.exports = {
   isWindows,
   linuxHome,
   possibleLocations,
-  rootDir,
+  rootDirectory,
   themeFilePath,
   windowsHome,
 };
