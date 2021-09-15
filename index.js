@@ -10,7 +10,6 @@ const {
   alacrittyFileExists,
   alacrittyTemplatePath,
   isWindows,
-  themeFilePath,
 } = require('./src/helpers');
 
 // pick the correct config file or handle errors, if it doesn't exist
@@ -47,8 +46,7 @@ function createConfigFile() {
     });
 }
 
-function updateTheme(data, theme, ymlPath, preview = false) {
-  const themePath = themeFilePath(theme);
+function updateThemeWithFile(data, themePath, ymlPath, preview = false) {
   const themeFile = fs.readFileSync(themePath, 'utf8');
 
   const doc = YAML.parseDocument(data);
@@ -82,12 +80,31 @@ function updateTheme(data, theme, ymlPath, preview = false) {
     .writeFile(ymlPath, newContent, 'utf8')
     .then(() => {
       if (!preview) {
-        console.log(`The theme ${theme} has been applied successfully!`);
+        const namePairs = colors
+          ? colors.value.items.filter((i) => i.key.value === 'name')
+          : [];
+        const themeName = namePairs.length !== 0 ? namePairs[0].value : null;
+        if (themeName !== null) {
+          console.log(
+            `The theme "${themeName}" has been applied successfully!`
+          );
+        } else {
+          console.log(`The theme has been applied successfully!`);
+        }
       }
     })
     .catch((err) => {
       if (err) throw err;
     });
+}
+
+function updateTheme(data, theme, ymlPath, preview = false) {
+  const isSpecificFile =
+    fs.existsSync(theme) && !fs.lstatSync(theme).isDirectory();
+  const themePath = isSpecificFile
+    ? theme
+    : path.join(__dirname, `themes/${theme}.yml`);
+  return updateThemeWithFile(data, themePath, ymlPath, preview);
 }
 
 function applyTheme(theme, preview = false) {
