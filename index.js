@@ -10,6 +10,7 @@ const {
   alacrittyFileExists,
   alacrittyTemplatePath,
   isWindows,
+  themeFilePath,
 } = require('./src/helpers');
 
 // pick the correct config file or handle errors, if it doesn't exist
@@ -101,9 +102,7 @@ function updateThemeWithFile(data, themePath, ymlPath, preview = false) {
 function updateTheme(data, theme, ymlPath, preview = false) {
   const isSpecificFile =
     fs.existsSync(theme) && !fs.lstatSync(theme).isDirectory();
-  const themePath = isSpecificFile
-    ? theme
-    : path.join(__dirname, `themes/${theme}.yml`);
+  const themePath = isSpecificFile ? theme : themeFilePath(theme);
   return updateThemeWithFile(data, themePath, ymlPath, preview);
 }
 
