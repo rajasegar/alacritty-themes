@@ -4,18 +4,18 @@ const mockedEnv = require('mocked-env');
 
 const {
   possibleLocations,
-  rootDir,
+  rootDirectory,
   isWindows,
   linuxHome,
   archHome,
 } = require('../../../src/helpers');
 
-describe('rootDir', () => {
+describe('rootDirectory', () => {
   it('returns the alacritty-themes root directory', () => {
     let alacrittyThemesRootDir = '/home/rajasegar/alacritty-themes';
     let restore = mockedEnv({ PWD: alacrittyThemesRootDir });
 
-    assert(rootDir(), alacrittyThemesRootDir);
+    assert(rootDirectory(), alacrittyThemesRootDir);
     restore();
   });
 });
