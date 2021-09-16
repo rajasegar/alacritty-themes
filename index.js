@@ -74,8 +74,8 @@ function updateThemeWithFile(data, themePath, ymlPath, preview = false) {
     .writeFile(ymlPath, newContent, 'utf8')
     .then(() => {
       if (!preview) {
-        const namePairs = colors
-          ? colors.value.items.filter((i) => i.key.value === 'name')
+        const namePairs = alacrittyColors
+          ? alacrittyColors.value.items.filter((i) => i.key.value === 'name')
           : [];
         const themeName = namePairs.length !== 0 ? namePairs[0].value : null;
         if (themeName !== null) {
@@ -96,12 +96,13 @@ function updateTheme(data, theme, ymlPath, preview = false) {
   const isSpecificFile =
     fs.existsSync(theme) && !fs.lstatSync(theme).isDirectory();
   const themePath = isSpecificFile ? theme : themeFilePath(theme);
+
   return updateThemeWithFile(data, themePath, ymlPath, preview);
 }
 
 function applyTheme(theme, preview = false) {
-  // alacritty.yml path
   const ymlPath = getAlacrittyConfig();
+
   return fsPromises.readFile(ymlPath, 'utf8').then((data) => {
     return updateTheme(data, theme, ymlPath, preview);
   });

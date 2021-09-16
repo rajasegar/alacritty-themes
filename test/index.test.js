@@ -20,12 +20,12 @@ const homeDir = linuxHome();
 afterEach(mockFs.restore);
 
 describe('Alacritty Themes', () => {
-  it('should not have a config file by default', () => {
+  it('returns NoAlacrittyFileFoundError error', () => {
     mockFs();
     assert.throws(() => getAlacrittyConfig(), NoAlacrittyFileFoundError);
   });
 
-  it('should have a config file after creating it', async () => {
+  it('creates an alacritty.yml config file', async () => {
     const templatePath = alacrittyTemplatePath();
     const mockDir = {
       'alacritty.yml': mockFs.load(templatePath),
@@ -37,32 +37,33 @@ describe('Alacritty Themes', () => {
     assert.strictEqual(ymlPath, `${homeDir}/.config/alacritty/alacritty.yml`);
   });
 
-  it('should set the correct theme colors', async () => {
-    const templatePath = alacrittyTemplatePath();
+  it('sets the correct theme colors', async () => {
+    const alacrittyPath = alacrittyTemplatePath();
+    const alacrittyContent = mockFs.bypass(() =>
+      fs.readFileSync(alacrittyPath, 'utf8')
+    );
     const draculaPath = themeFilePath('Dracula');
-    const draculaTemplateContent = mockFs.bypass(() =>
+    const draculaContent = mockFs.bypass(() =>
       fs.readFileSync(draculaPath, 'utf8')
     );
-    const draculaParsedContent = YAML.parse(draculaTemplateContent);
 
     const mockDir = {
-      'alacritty.yml': mockFs.load(templatePath),
+      'alacritty.yml': alacrittyContent,
       themes: {
-        'Dracula.yml': draculaTemplateContent,
+        'Dracula.yml': draculaContent,
       },
     };
-
     mockDir[`${homeDir}/.config`] = { alacritty: {} };
     mockFs(mockDir);
     await createConfigFile();
-    const ymlPath = getAlacrittyConfig();
+    const userAlacrittyPath = getAlacrittyConfig();
     await applyTheme('Dracula');
-    const newAlacrittyFile = fs.readFileSync(ymlPath, 'utf8');
-    const alacrittyParsedContent = YAML.parse(newAlacrittyFile);
+    const userAlacrittyFile = fs.readFileSync(userAlacrittyPath, 'utf8');
+    const alacritty = YAML.parseDocument(userAlacrittyFile);
 
-    assert.deepStrictEqual(
-      alacrittyParsedContent.colors,
-      draculaParsedContent.colors
+    assert.strictEqual(
+      alacritty.commentBefore,
+      ' Configuration for Alacritty, the GPU enhanced terminal emulator.'
     );
   });
 });
