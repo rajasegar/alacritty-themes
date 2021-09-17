@@ -38,6 +38,35 @@ describe('Alacritty Themes', () => {
   });
 
   it('sets the correct theme colors', async () => {
+    const templatePath = alacrittyTemplatePath();
+    const draculaPath = themeFilePath('Dracula');
+    const draculaTemplateContent = mockFs.bypass(() =>
+      fs.readFileSync(draculaPath, 'utf8')
+    );
+    const draculaParsedContent = YAML.parse(draculaTemplateContent);
+
+    const mockDir = {
+      'alacritty.yml': mockFs.load(templatePath),
+      themes: {
+        'Dracula.yml': draculaTemplateContent,
+      },
+    };
+
+    mockDir[`${homeDir}/.config`] = { alacritty: {} };
+    mockFs(mockDir);
+    await createConfigFile();
+    const ymlPath = getAlacrittyConfig();
+    await applyTheme('Dracula');
+    const newAlacrittyFile = fs.readFileSync(ymlPath, 'utf8');
+    const alacrittyParsedContent = YAML.parse(newAlacrittyFile);
+
+    assert.deepStrictEqual(
+      alacrittyParsedContent.colors,
+      draculaParsedContent.colors
+    );
+  });
+
+  it('keeps comments', async () => {
     const alacrittyPath = alacrittyTemplatePath();
     const alacrittyContent = mockFs.bypass(() =>
       fs.readFileSync(alacrittyPath, 'utf8')
