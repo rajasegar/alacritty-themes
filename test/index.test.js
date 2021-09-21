@@ -20,12 +20,12 @@ const homeDir = linuxHome();
 afterEach(mockFs.restore);
 
 describe('Alacritty Themes', () => {
-  it('should not have a config file by default', () => {
+  it('returns NoAlacrittyFileFoundError error', () => {
     mockFs();
     assert.throws(() => getAlacrittyConfig(), NoAlacrittyFileFoundError);
   });
 
-  it('should have a config file after creating it', async () => {
+  it('creates an alacritty.yml config file', async () => {
     const templatePath = alacrittyTemplatePath();
     const mockDir = {
       'alacritty.yml': mockFs.load(templatePath),
@@ -37,7 +37,7 @@ describe('Alacritty Themes', () => {
     assert.strictEqual(ymlPath, `${homeDir}/.config/alacritty/alacritty.yml`);
   });
 
-  it('should set the correct theme colors', async () => {
+  it('sets the correct theme colors', async () => {
     const templatePath = alacrittyTemplatePath();
     const draculaPath = themeFilePath('Dracula');
     const draculaTemplateContent = mockFs.bypass(() =>
@@ -63,6 +63,36 @@ describe('Alacritty Themes', () => {
     assert.deepStrictEqual(
       alacrittyParsedContent.colors,
       draculaParsedContent.colors
+    );
+  });
+
+  it('keeps comments', async () => {
+    const alacrittyPath = alacrittyTemplatePath();
+    const alacrittyContent = mockFs.bypass(() =>
+      fs.readFileSync(alacrittyPath, 'utf8')
+    );
+    const draculaPath = themeFilePath('Dracula');
+    const draculaContent = mockFs.bypass(() =>
+      fs.readFileSync(draculaPath, 'utf8')
+    );
+
+    const mockDir = {
+      'alacritty.yml': alacrittyContent,
+      themes: {
+        'Dracula.yml': draculaContent,
+      },
+    };
+    mockDir[`${homeDir}/.config`] = { alacritty: {} };
+    mockFs(mockDir);
+    await createConfigFile();
+    const userAlacrittyPath = getAlacrittyConfig();
+    await applyTheme('Dracula');
+    const userAlacrittyFile = fs.readFileSync(userAlacrittyPath, 'utf8');
+    const alacritty = YAML.parseDocument(userAlacrittyFile);
+
+    assert.strictEqual(
+      alacritty.commentBefore,
+      ' Configuration for Alacritty, the GPU enhanced terminal emulator.'
     );
   });
 });
