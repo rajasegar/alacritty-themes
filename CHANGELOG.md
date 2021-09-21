@@ -1,3 +1,10 @@
+## [4.1.2](https://github.com/rajasegar/alacritty-themes/compare/v4.1.1...v4.1.2) (2021-09-21)
+
+
+### Bug Fixes
+
+* stop removing existing comments on the alacritty file ([#42](https://github.com/rajasegar/alacritty-themes/issues/42)) ([98a5d68](https://github.com/rajasegar/alacritty-themes/commit/98a5d68d4be76eb8a7e9ccd9277ada5a44ef71e6)), closes [#30](https://github.com/rajasegar/alacritty-themes/issues/30)
+
 ## [4.1.1](https://github.com/rajasegar/alacritty-themes/compare/v4.1.0...v4.1.1) (2021-08-18)
 
 
