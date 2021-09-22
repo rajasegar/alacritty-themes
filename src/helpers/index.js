@@ -7,7 +7,7 @@ const NoAlacrittyFileFoundError = new Error(
 );
 
 function rootDirectory() {
-  return process.env.PWD;
+  return __dirname + "/../../";
 }
 
 function themeFilePath(themeName) {
