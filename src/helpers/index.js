@@ -30,6 +30,20 @@ function archHome() {
   return process.env.XDG_CONFIG_HOME;
 }
 
+function pathToAlacrittyFile() {
+  return isWindows()
+    ? pathToAlacrittyFileOnWindows()
+    : pathToAlacrittyFileOnLinux();
+}
+
+function pathToAlacrittyFileOnWindows() {
+  return path.join(windowsHome(), 'alacritty/');
+}
+
+function pathToAlacrittyFileOnLinux() {
+  return path.join(linuxHome(), '.config/alacritty/');
+}
+
 function alacrittyTemplatePath() {
   return path.join(rootDirectory(), 'alacritty.yml');
 }
@@ -80,6 +94,7 @@ module.exports = {
   archHome,
   isWindows,
   linuxHome,
+  pathToAlacrittyFile,
   possibleLocations,
   rootDirectory,
   themeFilePath,

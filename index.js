@@ -1,7 +1,6 @@
 const YAML = require('yaml');
 const fs = require('fs');
 const fsPromises = fs.promises;
-const path = require('path');
 const { Pair } = require('yaml/types');
 
 const {
@@ -9,7 +8,7 @@ const {
   alacrittyConfigPath,
   alacrittyFileExists,
   alacrittyTemplatePath,
-  isWindows,
+  pathToAlacrittyFile,
   themeFilePath,
 } = require('./src/helpers');
 
@@ -25,22 +24,20 @@ function getAlacrittyConfig() {
 function createConfigFile() {
   const templatePath = alacrittyTemplatePath();
   const configTemplate = fs.readFileSync(templatePath, 'utf8');
-
-  const homeDir = isWindows()
-    ? path.join(process.env.APPDATA, 'alacritty/')
-    : path.join(process.env.HOME, '.config/alacritty/');
+  const directories = pathToAlacrittyFile();
+  const configFile = `${directories}alacritty.yml`;
 
   // If .config/alacritty folder doesn't exists, create one
-  if (!fs.existsSync(homeDir)) {
-    fs.mkdirSync(homeDir);
+  if (!fs.existsSync(directories)) {
+    fs.mkdirSync(directories);
   }
-
-  const configFile = `${homeDir}/alacritty.yml`;
 
   return fsPromises
     .writeFile(configFile, configTemplate, 'utf8')
     .then(() => {
-      console.log('New config file created.');
+      console.log(
+        `The alacritty.yml config file was created, here ${configFile}`
+      );
     })
     .catch((err) => {
       if (err) throw err;
@@ -50,17 +47,17 @@ function createConfigFile() {
 function updateThemeWithFile(data, themePath, ymlPath, preview = false) {
   const themeFile = fs.readFileSync(themePath, 'utf8');
   const themeDoc = YAML.parseDocument(themeFile);
-  const themeColors = themeDoc.contents.items.filter(
+  const themeColors = themeDoc.contents.items.find(
     (i) => i.key.value === 'colors'
-  )[0];
+  );
 
   const alacrittyDoc = YAML.parseDocument(data);
   if (alacrittyDoc.contents === null) {
     alacrittyDoc.contents = { items: [] };
   }
-  const alacrittyColors = alacrittyDoc.contents.items.filter(
+  const alacrittyColors = alacrittyDoc.contents.items.find(
     (i) => i.key.value === 'colors'
-  )[0];
+  );
 
   if (alacrittyColors) {
     alacrittyColors.value = themeColors.value;
@@ -77,8 +74,8 @@ function updateThemeWithFile(data, themePath, ymlPath, preview = false) {
         const namePairs = alacrittyColors
           ? alacrittyColors.value.items.filter((i) => i.key.value === 'name')
           : [];
-        const themeName = namePairs.length !== 0 ? namePairs[0].value : null;
-        if (themeName !== null) {
+        const themeName = namePairs.length === 0 ? null : namePairs[0].value;
+        if (themeName) {
           console.log(
             `The theme "${themeName}" has been applied successfully!`
           );
