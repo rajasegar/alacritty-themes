@@ -6,6 +6,7 @@ const fs = require('fs');
 
 const {
   archHome,
+  pathToAlacrittyFile,
   isWindows,
   linuxHome,
   possibleLocations,
@@ -82,6 +83,16 @@ describe('archHome', () => {
     let restore = mockedEnv({ XDG_CONFIG_HOME: home });
 
     assert.strictEqual(archHome(), home);
+    restore();
+  });
+});
+
+describe('pathToAlacrittyFile', () => {
+  it('returns the path to alacritty file on linux', () => {
+    let home = '/home/rajasegar';
+    let restore = mockedEnv({ HOME: home });
+
+    assert.strictEqual(pathToAlacrittyFile(), `${home}/.config/alacritty/`);
     restore();
   });
 });
