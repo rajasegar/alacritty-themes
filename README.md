@@ -28,6 +28,12 @@ If you are using `npx` you don't have to install the package:
 npx alacritty-themes
 ```
 
+If you are using Archlinux, you can install it from [AUR](https://aur.archlinux.org/packages/alacritty-themes/)
+
+```
+paru -S alacritty-themes
+```
+
 ## Usage
 
 ```
