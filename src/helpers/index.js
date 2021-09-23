@@ -7,7 +7,7 @@ const NoAlacrittyFileFoundError = new Error(
 );
 
 function rootDirectory() {
-  return __dirname + "/../../";
+  return __dirname + '/../../';
 }
 
 function themeFilePath(themeName) {
