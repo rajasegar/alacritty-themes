@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const settings = require('../../settings');
 
 const NoAlacrittyFileFoundError = new Error(
   'No Alacritty configuration file found. Expected one of the following files to exist:\n' +
@@ -7,7 +8,7 @@ const NoAlacrittyFileFoundError = new Error(
 );
 
 function rootDirectory() {
-  return process.env.PWD;
+  return settings.PROJECT_DIR;
 }
 
 function themeFilePath(themeName) {
