@@ -25,7 +25,7 @@ describe('rootDirectory', () => {
 });
 
 describe('themeFilePath', () => {
-  it('returns a theme file', () => {
+  it.skip('returns a theme file', () => {
     let alacrittyThemeDirectory = '/home/rajasegar/alacritty-themes';
     let restore = mockedEnv({ PWD: alacrittyThemeDirectory });
     mockFs({
