@@ -1,3 +1,10 @@
+## [4.1.3](https://github.com/rajasegar/alacritty-themes/compare/v4.1.2...v4.1.3) (2021-09-28)
+
+
+### Bug Fixes
+
+* set project dir as rootDirectory ([#47](https://github.com/rajasegar/alacritty-themes/issues/47)) ([82782dc](https://github.com/rajasegar/alacritty-themes/commit/82782dcb0bdb3c404881562e6e1e25adc54f4e78))
+
 ## [4.1.2](https://github.com/rajasegar/alacritty-themes/compare/v4.1.1...v4.1.2) (2021-09-21)
 
 
