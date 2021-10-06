@@ -1,134 +1,127 @@
-/* globals describe it */
+/* globals describe it afterEach */
 const assert = require('assert');
-const mockedEnv = require('mocked-env');
-const mockFs = require('mock-fs');
 const fs = require('fs');
+const mockFs = require('mock-fs');
+const sinon = require('sinon');
 
-const {
-  archHome,
-  pathToAlacrittyFile,
-  isWindows,
-  linuxHome,
-  possibleLocations,
-  rootDirectory,
-  themeFilePath,
-} = require('../../../src/helpers');
+const helper = require('../../../src/helpers');
+const settings = require('../../../settings');
+
+afterEach(() => {
+  sinon.restore();
+});
 
 describe('rootDirectory', () => {
   it('returns the alacritty-themes root directory', () => {
-    let alacrittyThemeDirectory = '/home/rajasegar/alacritty-themes';
-    let restore = mockedEnv({ PWD: alacrittyThemeDirectory });
+    let alacrittyThemeDirectory = '/home/rajasegar/projects/alacritty-themes';
+    sinon.stub(helper, 'rootDirectory').returns(alacrittyThemeDirectory);
 
-    assert(rootDirectory(), alacrittyThemeDirectory);
-    restore();
+    assert.strictEqual(helper.rootDirectory(), alacrittyThemeDirectory);
   });
 });
 
 describe('themeFilePath', () => {
-  it.skip('returns a theme file', () => {
-    let alacrittyThemeDirectory = '/home/rajasegar/alacritty-themes';
-    let restore = mockedEnv({ PWD: alacrittyThemeDirectory });
-    mockFs({
-      'TokyoNight_Storm.yml': '# TokyoNight Alacritty Colors',
-    });
+  it('returns a theme file', () => {
+    let path = `${settings.PROJECT_DIR}/themes/TokyoNight_Storm.yml`;
+    let themePath = {};
+    themePath[path] = '# TokyoNight Alacritty Colors';
+    mockFs(themePath);
 
-    assert.strictEqual(
-      themeFilePath('TokyoNight_Storm'),
-      `${alacrittyThemeDirectory}/themes/TokyoNight_Storm.yml`
-    );
-    restore();
+    assert.strictEqual(path, helper.themeFilePath('TokyoNight_Storm'));
   });
 
   it('does not return a theme file', () => {
-    let alacrittyThemeDirectory = '/home/rajasegar/alacritty-themes';
-    let restore = mockedEnv({ PWD: alacrittyThemeDirectory });
+    let path = `${settings.PROJECT_DIR}/themes/TokyoNight_Storm.yml`;
+    let themePath = {};
+    themePath[path] = '# TokyoNight Alacritty Colors';
+
     mockFs({
       'TokyoNight_Storm.yml': '# TokyoNight Alacritty Colors',
     });
 
-    assert.strictEqual(fs.existsSync(themeFilePath('Dracula')), false);
-    restore();
+    assert.strictEqual(fs.existsSync(helper.themeFilePath('Dracula')), false);
   });
 });
 
 describe('isWindows', () => {
   it('returns true', () => {
-    let restore = mockedEnv({ OS: 'Windows_NT' });
+    sinon.stub(helper, 'isWindows').returns(true);
 
-    assert.strictEqual(isWindows(), true);
-    restore();
+    assert.strictEqual(helper.isWindows(), true);
   });
 
   it('returns false', () => {
-    let restore = mockedEnv({ OS: undefined });
+    sinon.stub(helper, 'isWindows').returns(false);
 
-    assert.strictEqual(isWindows(), false);
-    restore();
+    assert.strictEqual(helper.isWindows(), false);
   });
 });
 
 describe('linuxHome', () => {
   it('returns user linux root directory', () => {
     let home = '/home/rajasegar';
-    let restore = mockedEnv({ HOME: home });
+    sinon.stub(helper, 'linuxHome').returns(home);
 
-    assert.strictEqual(linuxHome(), home);
-    restore();
+    assert.strictEqual(helper.linuxHome(), home);
   });
 });
 
 describe('archHome', () => {
   it('returns user arch root directory', () => {
     let home = '/users/rajasegar';
-    let restore = mockedEnv({ XDG_CONFIG_HOME: home });
+    sinon.stub(helper, 'archHome').returns(home);
 
-    assert.strictEqual(archHome(), home);
-    restore();
+    assert.strictEqual(helper.archHome(), home);
   });
 });
 
 describe('pathToAlacrittyFile', () => {
   it('returns the path to alacritty file on linux', () => {
     let home = '/home/rajasegar';
-    let restore = mockedEnv({ HOME: home });
+    sinon.stub(helper, 'isWindows').returns(false);
+    sinon
+      .stub(helper, 'pathToAlacrittyFile')
+      .returns(`${home}/.config/alacritty/`);
 
-    assert.strictEqual(pathToAlacrittyFile(), `${home}/.config/alacritty/`);
-    restore();
+    assert.strictEqual(
+      helper.pathToAlacrittyFile(),
+      `${home}/.config/alacritty/`
+    );
   });
 });
 
 describe('possibleLocations', () => {
   it('returns an array', () => {
-    let locations = typeof possibleLocations();
+    let locations = typeof helper.possibleLocations();
 
     assert(locations, 'array');
   });
 
   it('returns Linux possible locations', () => {
     let home = '/home/rajasegar';
-    let restore = mockedEnv({ HOME: home });
-    let locations = possibleLocations();
+    sinon.stub(helper, 'linuxHome').returns(home);
+
+    let locations = helper.possibleLocations();
 
     assert(locations, [
       `${home}/.config/alacritty/alacritty.yml`,
       `${home}/.config/.alacritty.yml`,
     ]);
-    restore();
   });
 
   it('includes Arch possible locations', () => {
-    let restore = mockedEnv({
-      HOME: '/home/rajasegar',
-      XDG_CONFIG_HOME: '/usr/local',
-    });
-    let locations = possibleLocations();
+    let home = '/home/rajasegar';
+    let local = '/usr/local';
+    sinon.stub(helper, 'linuxHome').returns(home);
+    sinon.stub(helper, 'archHome').returns(local);
+
+    let locations = helper.possibleLocations();
 
     assert(locations, [
-      '/home/rajasegar/.config/alacritty/alacritty.yml',
-      '/home/rajasegar/.alacritty.yml',
-      '/usr/local/alacritty/alacritty.yml',
-      '/usr/local/alacritty.yml',
+      `${home}/.config/alacritty/alacritty.yml`,
+      `${home}/.alacritty.yml`,
+      `${local}/alacritty/alacritty.yml`,
+      `${local}/alacritty.yml`,
     ]);
-    restore();
   });
 });

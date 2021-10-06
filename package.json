@@ -39,9 +39,9 @@
     "husky": "^7.0.2",
     "mocha": "^8.4.0",
     "mock-fs": "^5.0.0",
-    "mocked-env": "^1.3.5",
     "prettier": "^2.2.1",
-    "semantic-release": "^17.4.5"
+    "semantic-release": "^17.4.5",
+    "sinon": "^11.1.2"
   },
   "engines": {
     "node": ">=12.0.0"
