@@ -36,7 +36,7 @@ function createConfigFile() {
     .writeFile(configFile, configTemplate, 'utf8')
     .then(() => {
       console.log(
-        `The alacritty.yml config file was created, here ${configFile}`
+        `The alacritty.yml config file was created here ${configFile}`
       );
     })
     .catch((err) => {

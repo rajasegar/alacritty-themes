@@ -67,20 +67,20 @@ function possibleLocations() {
   let locations = [];
 
   locations.push(
-    path.resolve(linuxHome(), '.config/alacritty/alacritty.yml'),
-    path.resolve(linuxHome(), '.alacritty.yml')
+    path.join(linuxHome(), '.config/alacritty/alacritty.yml'),
+    path.join(linuxHome(), '.alacritty.yml')
   );
 
   if (isWindows()) {
-    locations.push(path.resolve(windowsHome(), 'alacritty/alacritty.yml'));
+    locations.push(path.join(windowsHome(), 'alacritty/alacritty.yml'));
   }
 
   // locations where the alacritty config can be located according to
   // https://github.com/alacritty/alacritty#configuration
   if (archHome()) {
     locations.push(
-      path.resolve(archHome(), 'alacritty/alacritty.yml'),
-      path.resolve(archHome(), 'alacritty.yml')
+      path.join(archHome(), 'alacritty/alacritty.yml'),
+      path.join(archHome(), 'alacritty.yml')
     );
   }
 
