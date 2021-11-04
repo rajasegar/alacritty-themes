@@ -5,14 +5,15 @@ const path = require('path');
 const prompts = require('prompts');
 const temp = require('temp').track();
 
+const { themesFolder } = require('../src/helpers');
+
 const {
   applyTheme,
   createConfigFile,
   getAlacrittyConfig,
 } = require('../index');
 
-const themesDir = path.join(__dirname, '..', 'themes/');
-const themes = fs.readdirSync(themesDir).map((f) => f.replace('.yml', ''));
+const themes = fs.readdirSync(themesFolder()).map((f) => f.replace('.yml', ''));
 
 function main() {
   if (process.argv.length > 2) {
