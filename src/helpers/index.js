@@ -15,6 +15,10 @@ function themeFilePath(themeName) {
   return path.join(rootDirectory(), `themes/${themeName}.yml`);
 }
 
+function themesFolder() {
+  return path.join(rootDirectory(), 'themes');
+}
+
 function isWindows() {
   return process.env.OS === 'Windows_NT';
 }
@@ -99,5 +103,6 @@ module.exports = {
   possibleLocations,
   rootDirectory,
   themeFilePath,
+  themesFolder,
   windowsHome,
 };
