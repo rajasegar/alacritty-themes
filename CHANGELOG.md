@@ -1,3 +1,10 @@
+## [4.1.4](https://github.com/rajasegar/alacritty-themes/compare/v4.1.3...v4.1.4) (2021-11-09)
+
+
+### Bug Fixes
+
+* add theme folder method ([#58](https://github.com/rajasegar/alacritty-themes/issues/58)) ([0c4b6fa](https://github.com/rajasegar/alacritty-themes/commit/0c4b6fa5978c12b1c8be6a84db195c70b2d22404))
+
 ## [4.1.3](https://github.com/rajasegar/alacritty-themes/compare/v4.1.2...v4.1.3) (2021-09-28)
 
 
