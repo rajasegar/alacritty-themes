@@ -70,10 +70,12 @@ function alacrittyConfigPath() {
 function possibleLocations() {
   let locations = [];
 
-  locations.push(
-    path.join(linuxHome(), '.config/alacritty/alacritty.yml'),
-    path.join(linuxHome(), '.alacritty.yml')
-  );
+  if (linuxHome()) {
+    locations.push(
+      path.join(linuxHome(), '.config/alacritty/alacritty.yml'),
+      path.join(linuxHome(), '.alacritty.yml')
+    );
+  }
 
   if (isWindows()) {
     locations.push(path.join(windowsHome(), 'alacritty/alacritty.yml'));
