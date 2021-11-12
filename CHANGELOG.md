@@ -1,3 +1,10 @@
+## [4.1.5](https://github.com/rajasegar/alacritty-themes/compare/v4.1.4...v4.1.5) (2021-11-12)
+
+
+### Bug Fixes
+
+* possible alacritty locations ([#68](https://github.com/rajasegar/alacritty-themes/issues/68)) ([9b1cb94](https://github.com/rajasegar/alacritty-themes/commit/9b1cb94de6ec6ad97c6508107b2ae886c812ec11)), closes [#67](https://github.com/rajasegar/alacritty-themes/issues/67)
+
 ## [4.1.4](https://github.com/rajasegar/alacritty-themes/compare/v4.1.3...v4.1.4) (2021-11-09)
 
 
