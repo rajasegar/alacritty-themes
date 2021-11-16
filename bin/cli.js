@@ -11,14 +11,19 @@ const {
   applyTheme,
   createConfigFile,
   getAlacrittyConfig,
+  getCurrentTheme,
 } = require('../index');
 
 const themes = fs.readdirSync(themesFolder()).map((f) => f.replace('.yml', ''));
 
 function main() {
-  if (process.argv.length > 2) {
+  const argumentsExist = process.argv.length > 2;
+
+  if (argumentsExist) {
     if (process.argv.includes('--create') || process.argv.includes('-c')) {
       createConfigFile();
+    } else if (process.argv.includes('--current')) {
+      console.log(getCurrentTheme());
     } else {
       // the 3rd arg is theme name
       applyTheme(process.argv[2]);
