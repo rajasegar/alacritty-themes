@@ -48,7 +48,7 @@ function getCurrentTheme() {
   const themeFile = fs.readFileSync(alacrittyConfigPath(), 'utf8');
   const themeDoc = YAML.parse(themeFile);
 
-  return themeDoc.colors.theme ? themeDoc.colors.theme : 'default';
+  return themeDoc.theme ? themeDoc.theme : 'default';
 }
 
 function updateThemeWithFile(
@@ -78,10 +78,14 @@ function updateThemeWithFile(
     alacrittyDoc.contents.items.push(new Pair('colors', themeColors.value));
   }
 
-  if (alacrittyColors.theme) {
-    alacrittyColors.theme.value = themeName;
+  const alacrittyTheme = alacrittyDoc.contents.items.find(
+    (i) => i.key.value === 'theme'
+  );
+
+  if (alacrittyTheme) {
+    alacrittyTheme.value = themeName;
   } else {
-    alacrittyColors.value.items.push(new Pair('theme', themeName));
+    alacrittyDoc.contents.items.push(new Pair('theme', themeName));
   }
 
   const newContent = String(alacrittyDoc);
