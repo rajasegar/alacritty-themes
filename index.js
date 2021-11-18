@@ -44,7 +44,20 @@ function createConfigFile() {
     });
 }
 
-function updateThemeWithFile(data, themePath, ymlPath, preview = false) {
+function getCurrentTheme() {
+  const themeFile = fs.readFileSync(alacrittyConfigPath(), 'utf8');
+  const themeDoc = YAML.parse(themeFile);
+
+  return themeDoc.theme ? themeDoc.theme : 'default';
+}
+
+function updateThemeWithFile(
+  data,
+  themeName,
+  themePath,
+  ymlPath,
+  preview = false
+) {
   const themeFile = fs.readFileSync(themePath, 'utf8');
   const themeDoc = YAML.parseDocument(themeFile);
   const themeColors = themeDoc.contents.items.find(
@@ -65,23 +78,23 @@ function updateThemeWithFile(data, themePath, ymlPath, preview = false) {
     alacrittyDoc.contents.items.push(new Pair('colors', themeColors.value));
   }
 
+  const alacrittyTheme = alacrittyDoc.contents.items.find(
+    (i) => i.key.value === 'theme'
+  );
+
+  if (alacrittyTheme) {
+    alacrittyTheme.value = themeName;
+  } else {
+    alacrittyDoc.contents.items.push(new Pair('theme', themeName));
+  }
+
   const newContent = String(alacrittyDoc);
 
   return fsPromises
     .writeFile(ymlPath, newContent, 'utf8')
     .then(() => {
       if (!preview) {
-        const namePairs = alacrittyColors
-          ? alacrittyColors.value.items.filter((i) => i.key.value === 'name')
-          : [];
-        const themeName = namePairs.length === 0 ? null : namePairs[0].value;
-        if (themeName) {
-          console.log(
-            `The theme "${themeName}" has been applied successfully!`
-          );
-        } else {
-          console.log(`The theme has been applied successfully!`);
-        }
+        console.log(`The theme "${themeName}" has been applied successfully!`);
       }
     })
     .catch((err) => {
@@ -94,7 +107,7 @@ function updateTheme(data, theme, ymlPath, preview = false) {
     fs.existsSync(theme) && !fs.lstatSync(theme).isDirectory();
   const themePath = isSpecificFile ? theme : themeFilePath(theme);
 
-  return updateThemeWithFile(data, themePath, ymlPath, preview);
+  return updateThemeWithFile(data, theme, themePath, ymlPath, preview);
 }
 
 function applyTheme(theme, preview = false) {
@@ -109,4 +122,5 @@ module.exports = {
   applyTheme,
   createConfigFile,
   getAlacrittyConfig,
+  getCurrentTheme,
 };
