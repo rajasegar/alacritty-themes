@@ -22,7 +22,10 @@ function main() {
   if (argumentsExist) {
     if (process.argv.includes('--create') || process.argv.includes('-C')) {
       createConfigFile();
-    } else if (process.argv.includes('--current') || process.argv.includes('-c')) {
+    } else if (
+      process.argv.includes('--current') ||
+      process.argv.includes('-c')
+    ) {
       console.log(getCurrentTheme());
     } else {
       // the 3rd arg is theme name
