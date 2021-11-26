@@ -21,7 +21,7 @@ function main() {
 
   if (argumentsExist) {
     if (process.argv.includes('--help') || process.argv.includes('-h')) {
-      
+      console.log('Usage: \n\talacritty-themes [options] [theme-name]\n');
     } else if (
       process.argv.includes('--create') ||
       process.argv.includes('-C')
