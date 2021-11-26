@@ -20,9 +20,9 @@ function main() {
   const argumentsExist = process.argv.length > 2;
 
   if (argumentsExist) {
-    if (process.argv.includes('--create') || process.argv.includes('-c')) {
+    if (process.argv.includes('--create') || process.argv.includes('-C')) {
       createConfigFile();
-    } else if (process.argv.includes('--current')) {
+    } else if (process.argv.includes('--current') || process.argv.includes('-c')) {
       console.log(getCurrentTheme());
     } else {
       // the 3rd arg is theme name
