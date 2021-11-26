@@ -20,7 +20,12 @@ function main() {
   const argumentsExist = process.argv.length > 2;
 
   if (argumentsExist) {
-    if (process.argv.includes('--create') || process.argv.includes('-C')) {
+    if (process.argv.includes('--help') || process.argv.includes('-h')) {
+      
+    } else if (
+      process.argv.includes('--create') ||
+      process.argv.includes('-C')
+    ) {
       createConfigFile();
     } else if (
       process.argv.includes('--current') ||
