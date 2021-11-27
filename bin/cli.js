@@ -20,10 +20,29 @@ function main() {
   const argumentsExist = process.argv.length > 2;
 
   if (argumentsExist) {
-    if (process.argv.includes('--create') || process.argv.includes('-c')) {
+    if (process.argv.includes('--help') || process.argv.includes('-h')) {
+      console.log('Usage: \n\talacritty-themes [options] [theme-name]\n');
+      console.log(
+        'Description: \n\tThemes candy for alacritty A cross-platform GPU-accelerated terminal emulator\n'
+      );
+      console.log('Options: \n\t--help, -h\tshows this help message and exit');
+      console.log('\t--create, -C\tcreates a new config file');
+      console.log('\t--current, -c\tshows applied theme name');
+      console.log('\t--list, -l\tlists all available themes');
+    } else if (
+      process.argv.includes('--create') ||
+      process.argv.includes('-C')
+    ) {
       createConfigFile();
-    } else if (process.argv.includes('--current')) {
+    } else if (
+      process.argv.includes('--current') ||
+      process.argv.includes('-c')
+    ) {
       console.log(getCurrentTheme());
+    } else if (process.argv.includes('--list') || process.argv.includes('-l')) {
+      themes.map((theme, index) => {
+        console.log(index, theme);
+      });
     } else {
       // the 3rd arg is theme name
       applyTheme(process.argv[2]);
