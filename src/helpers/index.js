@@ -5,7 +5,7 @@ const settings = require('../../settings');
 const NoAlacrittyFileFoundError = new Error(
   'No Alacritty configuration file found.\nExpected one of the following files to exist:\n' +
     possibleLocations().join('\n') +
-    "\nOr you can create a new one using 'alacritty-themes --create'"
+    '\nOr you can create a new one using `alacritty-themes --create`'
 );
 
 function rootDirectory() {
