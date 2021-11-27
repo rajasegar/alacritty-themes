@@ -28,7 +28,7 @@ function main() {
       console.log('Options: \n\t--help, -h\tshows this help message and exit');
       console.log('\t--create, -C\tcreates a new config file');
       console.log('\t--current, -c\tshows applied theme name');
-      console.log('\t--list, -l\tlists all avilbale themes');
+      console.log('\t--list, -l\tlists all available themes');
     } else if (
       process.argv.includes('--create') ||
       process.argv.includes('-C')
