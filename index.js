@@ -11,6 +11,7 @@ const {
   pathToAlacrittyFile,
   themeFilePath,
 } = require('./src/helpers');
+const { exit } = require('process');
 
 // pick the correct config file or handle errors, if it doesn't exist
 function getAlacrittyConfig() {
@@ -45,6 +46,12 @@ function createConfigFile() {
 }
 
 function getCurrentTheme() {
+  if (!alacrittyConfigPath()) {
+    console.log(
+      'No Alacritty configuration file found\nRun: `alacritty-themes -C` to create one'
+    );
+    exit(1);
+  }
   const themeFile = fs.readFileSync(alacrittyConfigPath(), 'utf8');
   const themeDoc = YAML.parse(themeFile);
 
