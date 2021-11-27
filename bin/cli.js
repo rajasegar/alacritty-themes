@@ -22,6 +22,12 @@ function main() {
   if (argumentsExist) {
     if (process.argv.includes('--help') || process.argv.includes('-h')) {
       console.log('Usage: \n\talacritty-themes [options] [theme-name]\n');
+      console.log(
+        'Description: \n\tThemes candy for alacritty A cross-platform GPU-accelerated terminal emulator\n'
+      );
+      console.log('Options: \n\t--help, -h\tshows this help message and exit');
+      console.log('\t--create, -C\tcreates a new config file');
+      console.log('\t--current, -c\tuse provided theme');
     } else if (
       process.argv.includes('--create') ||
       process.argv.includes('-C')
