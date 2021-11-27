@@ -10,7 +10,7 @@ Themes :candy: for [alacritty](https://github.com/alacritty/alacritty) A cross-p
 To find the list of themes, you can visit the alacritty [wiki page](https://github.com/alacritty/alacritty/wiki/Color-schemes)
 
 - Live preview the themes
-- 150+ Themes to choose from
+- 200+ Themes to choose from
 - Apply any theme with just one command at the terminal
 - Option to create your `alacritty.yml` config file
 - Simple, Easy and intuitive User experience
