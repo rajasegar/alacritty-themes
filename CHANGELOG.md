@@ -1,3 +1,10 @@
+## [4.1.6](https://github.com/rajasegar/alacritty-themes/compare/v4.1.5...v4.1.6) (2021-11-27)
+
+
+### Bug Fixes
+
+* check if alacrittyConfigPath is undefined before reading the file ([#74](https://github.com/rajasegar/alacritty-themes/issues/74)) ([afd82eb](https://github.com/rajasegar/alacritty-themes/commit/afd82ebbe516bf942a6f0cefb6438b207d6590fc))
+
 ## [4.1.5](https://github.com/rajasegar/alacritty-themes/compare/v4.1.4...v4.1.5) (2021-11-12)
 
 
