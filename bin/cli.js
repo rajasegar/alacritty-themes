@@ -38,6 +38,10 @@ function main() {
       process.argv.includes('-c')
     ) {
       console.log(getCurrentTheme());
+    } else if (process.argv.includes('--list') || process.argv.includes('-l')) {
+      themes.map((theme, index) => {
+        console.log(index, theme);
+      });
     } else {
       // the 3rd arg is theme name
       applyTheme(process.argv[2]);
