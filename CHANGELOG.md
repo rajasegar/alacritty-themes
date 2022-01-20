@@ -1,3 +1,10 @@
+# [4.2.0](https://github.com/rajasegar/alacritty-themes/compare/v4.1.6...v4.2.0) (2022-01-20)
+
+
+### Features
+
+* **convert:** remove convert file ([#89](https://github.com/rajasegar/alacritty-themes/issues/89)) ([e15d125](https://github.com/rajasegar/alacritty-themes/commit/e15d12571de91f99ef66f132f0487c035d94f47d))
+
 ## [4.1.6](https://github.com/rajasegar/alacritty-themes/compare/v4.1.5...v4.1.6) (2021-11-27)
 
 
