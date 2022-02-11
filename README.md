@@ -70,6 +70,7 @@ Just append this below line to your `~/.bashrc` or `~/.bash_profile`
 ```
 alias at='alacritty-themes'
 ```
+
 Now you can simply use `at` to choose themes for your alacritty terminal.
 
 ```
@@ -79,7 +80,6 @@ at
 ## Discussions
 
 If you have some questions about alacritty-themes, please use the [Discussions Tab](https://github.com/rajasegar/alacritty-themes/discussions) in the correct category that way our community can solve their questions faster.
-
 
 ## Contributors
 
