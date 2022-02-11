@@ -1,3 +1,10 @@
+# [4.3.0](https://github.com/rajasegar/alacritty-themes/compare/v4.2.0...v4.3.0) (2022-02-11)
+
+
+### Features
+
+* **alacritty:** update readme ([#101](https://github.com/rajasegar/alacritty-themes/issues/101)) ([37d2bd6](https://github.com/rajasegar/alacritty-themes/commit/37d2bd6911d6328addbb51b98ef9cc269e8110d8))
+
 # [4.2.0](https://github.com/rajasegar/alacritty-themes/compare/v4.1.6...v4.2.0) (2022-01-20)
 
 
