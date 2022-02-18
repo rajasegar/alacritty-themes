@@ -15,6 +15,12 @@ env:
   LC_CTYPE: en_US.UTF-8
 
 #window:
+  # Window background opacity
+  #
+  # Specified in floating number from `0.0` to `1.0`.
+  # The value `0.0` is completely transparent and `1.0` is opaque.
+  #opacity: 1.0
+
   # Window dimensions (changes require restart)
   #
   # Specified in number of columns/lines, not pixels.
@@ -275,12 +281,6 @@ colors:
 #  animation: EaseOutExpo
 #  duration: 0
 #  color: '#ffffff'
-
-# Background opacity
-#
-# Window opacity as a floating point number from `0.0` to `1.0`.
-# The value `0.0` is completely transparent and `1.0` is opaque.
-#opacity: 1.0
 
 #selection:
   #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
