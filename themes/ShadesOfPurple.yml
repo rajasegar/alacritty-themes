@@ -1,0 +1,36 @@
+# Shades of Purple Alacritty
+# https://github.com/ahmadawais/shades-of-purple-alacritty
+
+# Colors
+colors:
+    # Default colors
+    primary:
+        background: '#1E1E3F'
+        foreground: '#FFFFFF'
+
+    # Colors the cursor will use if `custom_cursor_colors` is true
+    cursor:
+        text: '#1E1E3F'
+        cursor: '#FAD000'
+
+    # Normal colors
+    normal:
+        black: '#000000'
+        red: '#D52822'
+        green: '#3DB72A'
+        yellow: '#FAD000'
+        blue: '#6943FF'
+        magenta: '#FF628C'
+        cyan: '#9EFFFF'
+        white: '#DBDBE0'
+
+    # Bright colors
+    bright:
+        black: '#5C5C61'
+        red: '#FF000D'
+        green: '#3AD900'
+        yellow: '#FAD000'
+        blue: '#6943FF'
+        magenta: '#FF628C'
+        cyan: '#9EFFFF'
+        white: '#FFFFFF'
