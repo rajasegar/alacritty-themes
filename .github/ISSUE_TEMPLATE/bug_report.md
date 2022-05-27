@@ -22,7 +22,7 @@ Steps to reproduce the behavior:
 2. Run alacritty-themes
 
 - [ ] Did you add params? yes, I type "alacritty-themes Ayu-Dark"
-- [ ] Did you add params? no, I just tipe "alacritty-themes" then click up/down keys
+- [ ] Did you add params? no, I just type "alacritty-themes" then click up/down keys
 
 3. See error
 
@@ -30,7 +30,7 @@ Steps to reproduce the behavior:
 
 A clear and concise description of what you expected to happen.
 
-### Operative System:
+### Operating System:
 
 - [ ] Windows
 - [ ] Ubuntu
