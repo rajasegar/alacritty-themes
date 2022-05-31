@@ -27,7 +27,10 @@ describe('themeFilePath', 'themesFolder', () => {
     themePath[path] = '# TokyoNight Alacritty Colors';
     mockFs(themePath);
 
-    assert.strictEqual(path, helper.themeFilePath('TokyoNight_Storm', themesFolder()));
+    assert.strictEqual(
+      path,
+      helper.themeFilePath('TokyoNight_Storm', helper.themesFolder())
+    );
   });
 
   it('does not return a theme file', () => {
@@ -39,7 +42,10 @@ describe('themeFilePath', 'themesFolder', () => {
       'TokyoNight_Storm.yml': '# TokyoNight Alacritty Colors',
     });
 
-    assert.strictEqual(fs.existsSync(helper.themeFilePath('Dracula', themesFolder())), false);
+    assert.strictEqual(
+      fs.existsSync(helper.themeFilePath('Dracula', helper.themesFolder())),
+      false
+    );
   });
 });
 

@@ -13,7 +13,7 @@ const {
   alacrittyTemplatePath,
   linuxHome,
   themeFilePath,
-	themesFolder
+  themesFolder,
 } = require('../src/helpers');
 
 const homeDir = linuxHome();
