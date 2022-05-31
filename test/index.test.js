@@ -13,6 +13,7 @@ const {
   alacrittyTemplatePath,
   linuxHome,
   themeFilePath,
+	themesFolder
 } = require('../src/helpers');
 
 const homeDir = linuxHome();
@@ -39,7 +40,7 @@ describe('Alacritty Themes', () => {
 
   it('sets the correct theme colors', async () => {
     const templatePath = alacrittyTemplatePath();
-    const draculaPath = themeFilePath('Dracula');
+    const draculaPath = themeFilePath('Dracula', themesFolder());
     const draculaTemplateContent = mockFs.bypass(() =>
       fs.readFileSync(draculaPath, 'utf8')
     );
@@ -56,7 +57,7 @@ describe('Alacritty Themes', () => {
     mockFs(mockDir);
     await createConfigFile();
     const ymlPath = getAlacrittyConfig();
-    await applyTheme('Dracula');
+    await applyTheme('Dracula', themesFolder());
     const newAlacrittyFile = fs.readFileSync(ymlPath, 'utf8');
     const alacrittyParsedContent = YAML.parse(newAlacrittyFile);
 
@@ -71,7 +72,7 @@ describe('Alacritty Themes', () => {
     const alacrittyContent = mockFs.bypass(() =>
       fs.readFileSync(alacrittyPath, 'utf8')
     );
-    const draculaPath = themeFilePath('Dracula');
+    const draculaPath = themeFilePath('Dracula', themesFolder());
     const draculaContent = mockFs.bypass(() =>
       fs.readFileSync(draculaPath, 'utf8')
     );
@@ -86,7 +87,7 @@ describe('Alacritty Themes', () => {
     mockFs(mockDir);
     await createConfigFile();
     const userAlacrittyPath = getAlacrittyConfig();
-    await applyTheme('Dracula');
+    await applyTheme('Dracula', themesFolder());
     const userAlacrittyFile = fs.readFileSync(userAlacrittyPath, 'utf8');
     const alacritty = YAML.parseDocument(userAlacrittyFile);
 

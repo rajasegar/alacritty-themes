@@ -13,7 +13,7 @@ function rootDirectory() {
 }
 
 function themeFilePath(themeName, themesFolder) {
-  return path.join(themesFolder, `/${themeName}.yml`);
+  return path.join(themesFolder, `${themeName}.yml`);
 }
 
 function themesFolder() {
