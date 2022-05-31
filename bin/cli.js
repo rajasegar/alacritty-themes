@@ -14,14 +14,16 @@ const {
   getCurrentTheme,
 } = require('../index');
 
-const themes = fs.readdirSync(themesFolder()).map((f) => f.replace('.yml', ''));
+let themes = fs.readdirSync(themesFolder()).map((f) => f.replace('.yml', ''));
 
 function main() {
   const argumentsExist = process.argv.length > 2;
+	const isAltThemesFolder = process.argv.includes('--directory') ||
+											process.argv.includes('-d');
 
-  if (argumentsExist) {
+  if (argumentsExist && !isAltThemesFolder) {
     if (process.argv.includes('--help') || process.argv.includes('-h')) {
-      console.log('Usage: \n\talacritty-themes [options] [theme-name]\n');
+      console.log('Usage: \n\talacritty-themes [options] [theme-name] | [themes-directory]\n');
       console.log(
         'Description: \n\tThemes candy for alacritty A cross-platform GPU-accelerated terminal emulator\n'
       );
@@ -29,6 +31,7 @@ function main() {
       console.log('\t--create, -C\tcreates a new config file');
       console.log('\t--current, -c\tshows applied theme name');
       console.log('\t--list, -l\tlists all available themes');
+      console.log('\t--directory, -d\tspecify themes directory');
     } else if (
       process.argv.includes('--create') ||
       process.argv.includes('-C')
@@ -45,9 +48,17 @@ function main() {
       });
     } else {
       // the 3rd arg is theme name
-      applyTheme(process.argv[2]);
+      applyTheme(process.argv[2], themesFolder());
     }
   } else {
+		let themesFolderPath = themesFolder();
+
+		// Alternative themes folder specified
+		if(isAltThemesFolder) {
+			themesFolderPath = path.resolve(process.argv[3]);
+			themes = fs.readdirSync(themesFolderPath).map((f) => f.replace('.yml', ''));
+		}
+
     // Copy original config to new file
     //
     const tempDir = temp.mkdirSync('alacritty-themes');
@@ -70,12 +81,12 @@ function main() {
           };
         }),
         onState: (state) => {
-          state.value && applyTheme(state.value, true); // set preview true
+          state.value && applyTheme(state.value, themesFolderPath, true); // set preview true
         },
       });
 
       if (response.theme) {
-        applyTheme(response.theme);
+        applyTheme(response.theme, themesFolderPath);
       } else {
         // Restore original config
         fs.readFile(backupPath, 'utf8', (err, data) => {
