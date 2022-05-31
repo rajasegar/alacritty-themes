@@ -18,12 +18,14 @@ let themes = fs.readdirSync(themesFolder()).map((f) => f.replace('.yml', ''));
 
 function main() {
   const argumentsExist = process.argv.length > 2;
-	const isAltThemesFolder = process.argv.includes('--directory') ||
-											process.argv.includes('-d');
+  const isAltThemesFolder =
+    process.argv.includes('--directory') || process.argv.includes('-d');
 
   if (argumentsExist && !isAltThemesFolder) {
     if (process.argv.includes('--help') || process.argv.includes('-h')) {
-      console.log('Usage: \n\talacritty-themes [options] [theme-name] | [themes-directory]\n');
+      console.log(
+        'Usage: \n\talacritty-themes [options] [theme-name] | [themes-directory]\n'
+      );
       console.log(
         'Description: \n\tThemes candy for alacritty A cross-platform GPU-accelerated terminal emulator\n'
       );
@@ -51,13 +53,15 @@ function main() {
       applyTheme(process.argv[2], themesFolder());
     }
   } else {
-		let themesFolderPath = themesFolder();
+    let themesFolderPath = themesFolder();
 
-		// Alternative themes folder specified
-		if(isAltThemesFolder) {
-			themesFolderPath = path.resolve(process.argv[3]);
-			themes = fs.readdirSync(themesFolderPath).map((f) => f.replace('.yml', ''));
-		}
+    // Alternative themes folder specified
+    if (isAltThemesFolder) {
+      themesFolderPath = path.resolve(process.argv[3]);
+      themes = fs
+        .readdirSync(themesFolderPath)
+        .map((f) => f.replace('.yml', ''));
+    }
 
     // Copy original config to new file
     //
