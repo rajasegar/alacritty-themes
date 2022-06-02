@@ -109,19 +109,19 @@ function updateThemeWithFile(
     });
 }
 
-function updateTheme(data, theme, ymlPath, preview = false) {
+function updateTheme(data, theme, themesFolder, ymlPath, preview = false) {
   const isSpecificFile =
     fs.existsSync(theme) && !fs.lstatSync(theme).isDirectory();
-  const themePath = isSpecificFile ? theme : themeFilePath(theme);
+  const themePath = isSpecificFile ? theme : themeFilePath(theme, themesFolder);
 
   return updateThemeWithFile(data, theme, themePath, ymlPath, preview);
 }
 
-function applyTheme(theme, preview = false) {
+function applyTheme(theme, themesFolder, preview = false) {
   const ymlPath = getAlacrittyConfig();
 
   return fsPromises.readFile(ymlPath, 'utf8').then((data) => {
-    return updateTheme(data, theme, ymlPath, preview);
+    return updateTheme(data, theme, themesFolder, ymlPath, preview);
   });
 }
 

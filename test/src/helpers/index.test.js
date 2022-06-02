@@ -20,14 +20,17 @@ describe('rootDirectory', () => {
   });
 });
 
-describe('themeFilePath', () => {
+describe('themeFilePath', 'themesFolder', () => {
   it('returns a theme file', () => {
     let path = `${settings.PROJECT_DIR}/themes/TokyoNight_Storm.yml`;
     let themePath = {};
     themePath[path] = '# TokyoNight Alacritty Colors';
     mockFs(themePath);
 
-    assert.strictEqual(path, helper.themeFilePath('TokyoNight_Storm'));
+    assert.strictEqual(
+      path,
+      helper.themeFilePath('TokyoNight_Storm', helper.themesFolder())
+    );
   });
 
   it('does not return a theme file', () => {
@@ -39,7 +42,10 @@ describe('themeFilePath', () => {
       'TokyoNight_Storm.yml': '# TokyoNight Alacritty Colors',
     });
 
-    assert.strictEqual(fs.existsSync(helper.themeFilePath('Dracula')), false);
+    assert.strictEqual(
+      fs.existsSync(helper.themeFilePath('Dracula', helper.themesFolder())),
+      false
+    );
   });
 });
 

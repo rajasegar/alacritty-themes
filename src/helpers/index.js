@@ -12,8 +12,8 @@ function rootDirectory() {
   return settings.PROJECT_DIR;
 }
 
-function themeFilePath(themeName) {
-  return path.join(rootDirectory(), `themes/${themeName}.yml`);
+function themeFilePath(themeName, themesFolder) {
+  return path.join(themesFolder, `${themeName}.yml`);
 }
 
 function themesFolder() {
