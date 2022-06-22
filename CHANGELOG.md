@@ -1,3 +1,10 @@
+# [4.4.0](https://github.com/rajasegar/alacritty-themes/compare/v4.3.0...v4.4.0) (2022-06-22)
+
+
+### Features
+
+* **dependencies:** Update dependencies ([#156](https://github.com/rajasegar/alacritty-themes/issues/156)) ([939aa5b](https://github.com/rajasegar/alacritty-themes/commit/939aa5b602bd8538ba0867bec39ef89c6262e059))
+
 # [4.3.0](https://github.com/rajasegar/alacritty-themes/compare/v4.2.0...v4.3.0) (2022-02-11)
 
 
