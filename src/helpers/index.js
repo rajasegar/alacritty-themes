@@ -1,4 +1,5 @@
 const fs = require('fs');
+const fsPromises = fs.promises;
 const path = require('path');
 const settings = require('../../settings');
 
@@ -7,6 +8,23 @@ const NoAlacrittyFileFoundError = new Error(
     possibleLocations().join('\n') +
     '\nOr you can create a new one using `alacritty-themes --create`'
 );
+
+function createBackup() {
+  if (!alacrittyFileExists()) {
+    return;
+  }
+
+  const backupFile = `${pathToAlacrittyFile()}alacritty.yml.${Date.now()}.bak`;
+
+  fsPromises
+    .copyFile(alacrittyFile(), backupFile)
+    .then(() => {
+      console.log(`Automatic backup file was created: ${backupFile}`);
+    })
+    .catch((err) => {
+      if (err) throw err;
+    });
+}
 
 function rootDirectory() {
   return settings.PROJECT_DIR;
@@ -34,6 +52,10 @@ function linuxHome() {
 
 function archHome() {
   return process.env.XDG_CONFIG_HOME;
+}
+
+function alacrittyFile() {
+  return `${pathToAlacrittyFile()}alacritty.yml`;
 }
 
 function pathToAlacrittyFile() {
@@ -100,6 +122,7 @@ module.exports = {
   alacrittyFileExists,
   alacrittyTemplatePath,
   archHome,
+  createBackup,
   isWindows,
   linuxHome,
   pathToAlacrittyFile,

@@ -64,6 +64,10 @@
             {
               "type": "refactor",
               "release": "patch"
+            },
+            {
+              "type": "feat",
+              "release": "patch"
             }
           ],
           "parserOpts": {
