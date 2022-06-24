@@ -5,7 +5,7 @@ const path = require('path');
 const prompts = require('prompts');
 const temp = require('temp').track();
 
-const { themesFolder } = require('../src/helpers');
+const { createBackup, themesFolder } = require('../src/helpers');
 
 const {
   applyTheme,
@@ -17,6 +17,7 @@ const {
 let themes = fs.readdirSync(themesFolder()).map((f) => f.replace('.yml', ''));
 
 function main() {
+  createBackup();
   const argumentsExist = process.argv.length > 2;
   const isAltThemesFolder =
     process.argv.includes('--directory') || process.argv.includes('-d');
