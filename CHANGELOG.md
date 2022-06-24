@@ -1,3 +1,10 @@
+## [4.4.1](https://github.com/rajasegar/alacritty-themes/compare/v4.4.0...v4.4.1) (2022-06-24)
+
+
+### Features
+
+* **cli:** Add createBackup method ([#157](https://github.com/rajasegar/alacritty-themes/issues/157)) ([ffe2abf](https://github.com/rajasegar/alacritty-themes/commit/ffe2abf804f7134c493f844dff52d2f0bad9be7a)), closes [#131](https://github.com/rajasegar/alacritty-themes/issues/131)
+
 # [4.4.0](https://github.com/rajasegar/alacritty-themes/compare/v4.3.0...v4.4.0) (2022-06-22)
 
 
