@@ -62,6 +62,15 @@ If no `alacritty.yml` is found in your `$HOME` path, you can create one using th
 alacritty-themes --create
 ```
 
+## Backups
+
+We have experienced some errors when stringifying probably,
+those are happening when changing themes, that's the reason we decided to
+create backups of your alacritty.yml before changing the theme.
+This could end up with a bunch of backup files, in the meantime,
+we add a better option to manage it you can remove all the backups with a
+single command: `rm ~/.config/alacritty/alacritty.yml.*`
+
 ## Bonus Tip: Alias
 
 You can also create an alias for `alacritty-themes` like `at`
