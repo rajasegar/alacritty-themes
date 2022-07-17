@@ -64,11 +64,12 @@ alacritty-themes --create
 
 ## Backups
 
-We have experienced some errors when stringifying probably,
-those are happening when changing themes, that's the reason we decided to
-create backups of your alacritty.yml before changing the theme.
-This could end up with a bunch of backup files, in the meantime,
-we add a better option to manage it you can remove all the backups with a
+We have experienced some errors when stringifying.
+Probably, those are happening when changing themes,
+that's the reason we decided to create backups of the `alacritty.yml` before changing the theme.
+
+This action could produce a bunch of backup files,
+while we get a better solution you can remove all the backups with a
 single command: `rm ~/.config/alacritty/alacritty.yml.*`
 
 ## Bonus Tip: Alias
