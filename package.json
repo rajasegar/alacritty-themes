@@ -63,10 +63,11 @@
             },
             {
               "type": "refactor",
-              "release": "patch"
+              "scope": "core-*",
+              "release": "minor"
             },
             {
-              "type": "feat",
+              "type": "refactor",
               "release": "patch"
             }
           ],
