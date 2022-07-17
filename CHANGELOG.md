@@ -1,3 +1,5 @@
+## [4.4.2](https://github.com/rajasegar/alacritty-themes/compare/v4.4.1...v4.4.2) (2022-07-17)
+
 ## [4.4.1](https://github.com/rajasegar/alacritty-themes/compare/v4.4.0...v4.4.1) (2022-06-24)
 
 
