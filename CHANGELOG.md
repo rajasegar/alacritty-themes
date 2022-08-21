@@ -1,3 +1,10 @@
+## [5.0.1](https://github.com/rajasegar/alacritty-themes/compare/v5.0.0...v5.0.1) (2022-08-21)
+
+
+### Bug Fixes
+
+* **backup:** fix where to find the alacritty file path ([#178](https://github.com/rajasegar/alacritty-themes/issues/178)) ([355e189](https://github.com/rajasegar/alacritty-themes/commit/355e189e7364206a5a843524e05ce42bf505f79e)), closes [#172](https://github.com/rajasegar/alacritty-themes/issues/172)
+
 # [5.0.0](https://github.com/rajasegar/alacritty-themes/compare/v4.4.2...v5.0.0) (2022-08-21)
 
 
