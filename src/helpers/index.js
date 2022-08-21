@@ -14,10 +14,11 @@ function createBackup() {
     return;
   }
 
-  const backupFile = `${pathToAlacrittyFile()}alacritty.yml.${Date.now()}.bak`;
+  const alacrittyFile = alacrittyConfigPath();
+  const backupFile = `${alacrittyFile}.${Date.now()}.bak`;
 
   fsPromises
-    .copyFile(alacrittyFile(), backupFile)
+    .copyFile(alacrittyFile, backupFile)
     .then(() => {
       console.log(`Automatic backup file was created: ${backupFile}`);
     })
@@ -52,10 +53,6 @@ function linuxHome() {
 
 function archHome() {
   return process.env.XDG_CONFIG_HOME;
-}
-
-function alacrittyFile() {
-  return `${pathToAlacrittyFile()}alacritty.yml`;
 }
 
 function pathToAlacrittyFile() {
