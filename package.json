@@ -7,10 +7,11 @@
     "alacritty-themes": "./bin/cli.js"
   },
   "scripts": {
-    "test": "mocha --recursive",
+    "commit": "cz",
     "deploy": "git push && git push --tags && npm publish",
     "lint": "eslint .",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "test": "mocha --recursive"
   },
   "keywords": [
     "alacritty",
@@ -28,10 +29,9 @@
   },
   "preferGlobal": true,
   "devDependencies": {
-    "@commitlint/cli": "17.0.3",
-    "@commitlint/config-conventional": "17.0.3",
     "@semantic-release/changelog": "6.0.1",
     "@semantic-release/git": "10.0.1",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "8.22.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-node": "11.1.0",
@@ -46,53 +46,9 @@
   "engines": {
     "node": ">=14.0.0"
   },
-  "release": {
-    "branches": [
-      "master"
-    ],
-    "plugins": [
-      [
-        "@semantic-release/commit-analyzer",
-        {
-          "preset": "angular",
-          "releaseRules": [
-            {
-              "type": "docs",
-              "scope": "README",
-              "release": "patch"
-            },
-            {
-              "type": "refactor",
-              "scope": "core-*",
-              "release": "minor"
-            },
-            {
-              "type": "refactor",
-              "release": "patch"
-            }
-          ],
-          "parserOpts": {
-            "noteKeywords": [
-              "BREAKING CHANGE",
-              "BREAKING CHANGES"
-            ]
-          }
-        }
-      ],
-      "@semantic-release/release-notes-generator",
-      "@semantic-release/changelog",
-      "@semantic-release/npm",
-      [
-        "@semantic-release/git",
-        {
-          "assets": [
-            "package.json",
-            "CHANGELOG.md"
-          ],
-          "message": "release(version): Release ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
-        }
-      ],
-      "@semantic-release/github"
-    ]
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
