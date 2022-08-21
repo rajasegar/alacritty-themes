@@ -1,3 +1,15 @@
+# [5.0.0](https://github.com/rajasegar/alacritty-themes/compare/v4.4.2...v5.0.0) (2022-08-21)
+
+
+### Features
+
+* **semantic-release:** fix semantic-release config ([468cbfb](https://github.com/rajasegar/alacritty-themes/commit/468cbfb79231cd9d306ad3f733da3ba424757179))
+
+
+### BREAKING CHANGES
+
+* **semantic-release:** fix semantic-release
+
 ## [4.4.2](https://github.com/rajasegar/alacritty-themes/compare/v4.4.1...v4.4.2) (2022-07-17)
 
 ## [4.4.1](https://github.com/rajasegar/alacritty-themes/compare/v4.4.0...v4.4.1) (2022-06-24)
