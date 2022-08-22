@@ -3,95 +3,69 @@
 const fs = require('fs');
 const path = require('path');
 const prompts = require('prompts');
-const temp = require('temp').track();
 
 const { createBackup, themesFolder, helpMessage } = require('../src/helpers');
 
-const {
-  applyTheme,
-  createConfigFile,
-  getAlacrittyConfig,
-  getCurrentTheme,
-} = require('../index');
+const { applyTheme, createConfigFile, getCurrentTheme } = require('../index');
 
-let themes = fs.readdirSync(themesFolder()).map((f) => f.replace('.yml', ''));
+let themesFolderPath = themesFolder();
+let themes = fs.readdirSync(themesFolderPath).map((f) => f.replace('.yml', ''));
 
 function main() {
   createBackup();
-  const argumentsExist = process.argv.length > 2;
-  const isAltThemesFolder =
-    process.argv.includes('--directory') || process.argv.includes('-d');
+  const command = process.argv[2];
 
-  if (argumentsExist && !isAltThemesFolder) {
-    if (process.argv.includes('--help') || process.argv.includes('-h')) {
-      return console.log(helpMessage());
-    } else if (
-      process.argv.includes('--create') ||
-      process.argv.includes('-C')
-    ) {
-      createConfigFile();
-    } else if (
-      process.argv.includes('--current') ||
-      process.argv.includes('-c')
-    ) {
-      console.log(getCurrentTheme());
-    } else if (process.argv.includes('--list') || process.argv.includes('-l')) {
-      themes.map((theme, index) => {
-        console.log(index, theme);
-      });
-    } else {
-      // the 3rd arg is theme name
-      applyTheme(process.argv[2], themesFolder());
-    }
-  } else {
-    let themesFolderPath = themesFolder();
-
-    // Alternative themes folder specified
-    if (isAltThemesFolder) {
-      themesFolderPath = path.resolve(process.argv[3]);
-      themes = fs
-        .readdirSync(themesFolderPath)
-        .map((f) => f.replace('.yml', ''));
+  if (['--directory', '-d'].includes(command)) {
+    if (process.argv[3] === undefined) {
+      return console.log('themes folder is required');
     }
 
-    // Copy original config to new file
-    //
-    const tempDir = temp.mkdirSync('alacritty-themes');
-    const backupPath = path.join(tempDir, 'alacritty.yml');
+    themesFolderPath = path.resolve(process.argv[3]);
+    themes = fs.readdirSync(themesFolderPath).map((f) => f.replace('.yml', ''));
+  }
 
-    const ymlPath = getAlacrittyConfig();
-    fs.copyFile(ymlPath, backupPath, (err) => {
-      if (err) throw err;
+  if (['--help', '-h'].includes(command)) {
+    return console.log(helpMessage());
+  }
+
+  if (['--create', '-C'].includes(command)) {
+    return createConfigFile();
+  }
+
+  if (['--current', '-c'].includes(command)) {
+    return console.log(getCurrentTheme());
+  }
+
+  if (['--list', '-l'].includes(command)) {
+    return themes.map((theme, index) => {
+      console.log(index, theme);
+    });
+  }
+
+  (async () => {
+    const response = await prompts({
+      type: 'autocomplete',
+      name: 'theme',
+      message: 'Select a theme',
+      choices: themes.map((t) => {
+        return {
+          title: t,
+          value: t,
+        };
+      }),
+      onState: (state) => {
+        state.value && applyTheme(state.value, themesFolderPath, true); // set preview true
+      },
     });
 
-    (async () => {
-      const response = await prompts({
-        type: 'autocomplete',
-        name: 'theme',
-        message: 'Select a theme',
-        choices: themes.map((t) => {
-          return {
-            title: t,
-            value: t,
-          };
-        }),
-        onState: (state) => {
-          state.value && applyTheme(state.value, themesFolderPath, true); // set preview true
-        },
-      });
-
+    try {
       if (response.theme) {
         applyTheme(response.theme, themesFolderPath);
-      } else {
-        // Restore original config
-        fs.readFile(backupPath, 'utf8', (err, data) => {
-          fs.writeFile(ymlPath, data, 'utf8', (err2) => {
-            if (err2) throw err2;
-          });
-        });
       }
-    })();
-  }
+    } catch (e) {
+      console.log('Something went wrong', e);
+    }
+  })();
 }
 
 main();
