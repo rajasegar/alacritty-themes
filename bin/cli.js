@@ -5,7 +5,7 @@ const path = require('path');
 const prompts = require('prompts');
 const temp = require('temp').track();
 
-const { createBackup, themesFolder } = require('../src/helpers');
+const { createBackup, themesFolder, helpMessage } = require('../src/helpers');
 
 const {
   applyTheme,
@@ -24,17 +24,7 @@ function main() {
 
   if (argumentsExist && !isAltThemesFolder) {
     if (process.argv.includes('--help') || process.argv.includes('-h')) {
-      console.log(
-        'Usage: \n\talacritty-themes [options] [theme-name] | [themes-directory]\n'
-      );
-      console.log(
-        'Description: \n\tThemes candy for alacritty A cross-platform GPU-accelerated terminal emulator\n'
-      );
-      console.log('Options: \n\t--help, -h\tshows this help message and exit');
-      console.log('\t--create, -C\tcreates a new config file');
-      console.log('\t--current, -c\tshows applied theme name');
-      console.log('\t--list, -l\tlists all available themes');
-      console.log('\t--directory, -d\tspecify themes directory');
+      return console.log(helpMessage());
     } else if (
       process.argv.includes('--create') ||
       process.argv.includes('-C')
