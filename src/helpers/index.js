@@ -113,6 +113,20 @@ function possibleLocations() {
   return locations;
 }
 
+function helpMessage() {
+  return `
+    Usage: \n\talacritty-themes [options] [theme-name] | [themes-directory]\n
+
+    Description: \n\tThemes candy for alacritty A cross-platform GPU-accelerated terminal emulator\n
+
+    Options: \n\t--help, -h\tshows this help message and exit
+    \t--create, -C\tcreates a new config file
+    \t--current, -c\tshows applied theme name
+    \t--list, -l\tlists all available themes
+    \t--directory, -d\tspecify themes directory
+  `;
+}
+
 module.exports = {
   NoAlacrittyFileFoundError,
   alacrittyConfigPath,
@@ -120,6 +134,7 @@ module.exports = {
   alacrittyTemplatePath,
   archHome,
   createBackup,
+  helpMessage,
   isWindows,
   linuxHome,
   pathToAlacrittyFile,
