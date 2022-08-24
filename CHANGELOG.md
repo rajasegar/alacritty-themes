@@ -1,3 +1,10 @@
+# [5.1.0](https://github.com/rajasegar/alacritty-themes/compare/v5.0.1...v5.1.0) (2022-08-24)
+
+
+### Features
+
+* **theme:** add Moonlight II VSCode theme ([73e9e6b](https://github.com/rajasegar/alacritty-themes/commit/73e9e6b6d6921260c652d0ff6fb8cab1acdf2449))
+
 ## [5.0.1](https://github.com/rajasegar/alacritty-themes/compare/v5.0.0...v5.0.1) (2022-08-21)
 
 
