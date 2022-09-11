@@ -1,3 +1,10 @@
+## [5.1.1](https://github.com/rajasegar/alacritty-themes/compare/v5.1.0...v5.1.1) (2022-09-11)
+
+
+### Bug Fixes
+
+* **cli:** fix direct theme application ([#184](https://github.com/rajasegar/alacritty-themes/issues/184)) ([2144b68](https://github.com/rajasegar/alacritty-themes/commit/2144b68c7b4b60ae89b242ef9f6d310ea907d2c0)), closes [#183](https://github.com/rajasegar/alacritty-themes/issues/183)
+
 # [5.1.0](https://github.com/rajasegar/alacritty-themes/compare/v5.0.1...v5.1.0) (2022-08-24)
 
 
