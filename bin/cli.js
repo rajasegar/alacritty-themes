@@ -4,7 +4,12 @@ const fs = require('fs');
 const path = require('path');
 const prompts = require('prompts');
 
-const { createBackup, themesFolder, helpMessage } = require('../src/helpers');
+const {
+  createBackup,
+  helpMessage,
+  existingTheme,
+  themesFolder,
+} = require('../src/helpers');
 
 const { applyTheme, createConfigFile, getCurrentTheme } = require('../index');
 
@@ -14,6 +19,10 @@ let themes = fs.readdirSync(themesFolderPath).map((f) => f.replace('.yml', ''));
 function main() {
   createBackup();
   const command = process.argv[2];
+
+  if (existingTheme(command, themesFolderPath)) {
+    return applyTheme(command, themesFolderPath);
+  }
 
   if (['--directory', '-d'].includes(command)) {
     if (process.argv[3] === undefined) {

@@ -31,6 +31,12 @@ function rootDirectory() {
   return settings.PROJECT_DIR;
 }
 
+function existingTheme(themeName, themesFolder) {
+  const file = themeFilePath(themeName, themesFolder);
+
+  return fs.existsSync(file);
+}
+
 function themeFilePath(themeName, themesFolder) {
   return path.join(themesFolder, `${themeName}.yml`);
 }
@@ -140,6 +146,7 @@ module.exports = {
   pathToAlacrittyFile,
   possibleLocations,
   rootDirectory,
+  existingTheme,
   themeFilePath,
   themesFolder,
   windowsHome,
