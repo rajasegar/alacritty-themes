@@ -1,3 +1,10 @@
+# [5.2.0](https://github.com/rajasegar/alacritty-themes/compare/v5.1.1...v5.2.0) (2022-09-20)
+
+
+### Features
+
+* **theme:** added Paper theme ([#186](https://github.com/rajasegar/alacritty-themes/issues/186)) ([3330397](https://github.com/rajasegar/alacritty-themes/commit/3330397e9ecbdbd56f6be97beb8dceab52f857cd))
+
 ## [5.1.1](https://github.com/rajasegar/alacritty-themes/compare/v5.1.0...v5.1.1) (2022-09-11)
 
 
