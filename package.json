@@ -41,7 +41,7 @@
     "mock-fs": "5.1.4",
     "prettier": "2.7.1",
     "semantic-release": "^19.0.2",
-    "sinon": "14.0.0"
+    "sinon": "14.0.1"
   },
   "engines": {
     "node": ">=14.0.0"
