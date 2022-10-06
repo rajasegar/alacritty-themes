@@ -25,7 +25,7 @@
   "dependencies": {
     "prompts": "2.4.2",
     "temp": "0.9.4",
-    "yaml": "1.10.2"
+    "yaml": "2.1.3"
   },
   "preferGlobal": true,
   "devDependencies": {
