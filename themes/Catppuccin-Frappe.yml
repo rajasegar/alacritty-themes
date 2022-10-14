@@ -24,9 +24,9 @@ colors:
     focused_match:
       foreground: '#303446' # base
       background: '#A6D189' # green
-    bar:
-      foreground: '#303446' # base
-      background: '#A5ADCE' # subtext0
+  footer_bar:
+    foreground: '#303446' # base
+    background: '#A5ADCE' # subtext0
 
   # Keyboard regex hints
   hints:
