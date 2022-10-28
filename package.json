@@ -1,6 +1,6 @@
 {
   "name": "alacritty-themes",
-  "version": "5.2.0",
+  "version": "5.3.0",
   "description": "Themes for Alacritty : A cross-platform GPU-Accelerated Terminal emulator",
   "main": "index.js",
   "bin": {

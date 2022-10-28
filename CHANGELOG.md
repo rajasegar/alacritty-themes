@@ -1,3 +1,10 @@
+# [5.3.0](https://github.com/rajasegar/alacritty-themes/compare/v5.2.0...v5.3.0) (2022-10-28)
+
+
+### Features
+
+* **dracula:** update dracula theme from the official page ([#197](https://github.com/rajasegar/alacritty-themes/issues/197)) ([934503b](https://github.com/rajasegar/alacritty-themes/commit/934503bb92ab69211061fd5ea1f7d0f66066280f))
+
 # [5.2.0](https://github.com/rajasegar/alacritty-themes/compare/v5.1.1...v5.2.0) (2022-09-20)
 
 
