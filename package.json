@@ -32,16 +32,16 @@
     "@semantic-release/changelog": "6.0.2",
     "@semantic-release/git": "10.0.1",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint": "8.29.0",
+    "eslint": "8.32.0",
     "eslint-config-prettier": "8.6.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-prettier": "4.2.1",
-    "husky": "8.0.2",
+    "husky": "8.0.3",
     "mocha": "10.2.0",
     "mock-fs": "5.2.0",
     "prettier": "2.8.1",
     "semantic-release": "^19.0.2",
-    "sinon": "15.0.0"
+    "sinon": "15.0.1"
   },
   "engines": {
     "node": ">=14.0.0"
