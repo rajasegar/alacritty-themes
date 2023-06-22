@@ -15,7 +15,7 @@ colors:
     blue: "#4a88e4"
     magenta: "#915caf"
     cyan: "#23acdd"
-    white: "#cecece"
+    white: "#f0f0f0"
   bright:
     black: "#777777"
     red: "#f36868"
