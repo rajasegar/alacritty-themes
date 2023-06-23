@@ -3,10 +3,10 @@ colors:
   author: tonsky
   primary:
     background: "#F7F7F7"
-    foreground: "#000000"
+    foreground: "#434343"
   cursor:
-    text: "#448C27"
-    cursor: "#000000"
+    text: "#F7F7F7"
+    cursor: "#434343"
   normal:
     black: "#000000"
     red: "#AA3731"
