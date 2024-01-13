@@ -1,0 +1,30 @@
+# Name: Color Star
+# Author: dkeg
+
+[colors.primary]
+background = "#000000"
+foreground = "#d3d3d3"
+
+[colors.cursor]
+text = "#000000"
+cursor = "#d3d3d3"
+
+[colors.normal]
+black = "#03010f"
+red = "#503b43"
+green = "#353b64"
+yellow = "#8c2424"
+blue = "#6067ac"
+magenta = "#624d19"
+cyan = "#7c83c0"
+white = "#9a600f"
+
+[colors.bright]
+black = "#ab9e9e"
+red = "#b28930"
+green = "#bbada9"
+yellow = "#c37305"
+blue = "#d0ae58"
+magenta = "#d7b559"
+cyan = "#f4e199"
+white = "#f6f4df"

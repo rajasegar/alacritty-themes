@@ -1,0 +1,30 @@
+# Name: Eighties (light)
+# Author: Chris Kempson
+
+[colors.primary]
+background = "#f2f0ec"
+foreground = "#515151"
+
+[colors.cursor]
+text = "#f2f0ec"
+cursor = "#515151"
+
+[colors.normal]
+black = "#2d2d2d"
+red = "#f2777a"
+green = "#99cc99"
+yellow = "#ffcc66"
+blue = "#6699cc"
+magenta = "#cc99cc"
+cyan = "#66cccc"
+white = "#d3d0c8"
+
+[colors.bright]
+black = "#747369"
+red = "#f2777a"
+green = "#99cc99"
+yellow = "#ffcc66"
+blue = "#6699cc"
+magenta = "#cc99cc"
+cyan = "#66cccc"
+white = "#f2f0ec"

@@ -1,0 +1,30 @@
+# Name: Tomorrow (light)
+# Author: Chris Kempson
+
+[colors.primary]
+background = "#ffffff"
+foreground = "#373b41"
+
+[colors.cursor]
+text = "#ffffff"
+cursor = "#373b41"
+
+[colors.normal]
+black = "#1d1f21"
+red = "#cc6666"
+green = "#b5bd68"
+yellow = "#f0c674"
+blue = "#81a2be"
+magenta = "#b294bb"
+cyan = "#8abeb7"
+white = "#c5c8c6"
+
+[colors.bright]
+black = "#969896"
+red = "#cc6666"
+green = "#b5bd68"
+yellow = "#f0c674"
+blue = "#81a2be"
+magenta = "#b294bb"
+cyan = "#8abeb7"
+white = "#ffffff"

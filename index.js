@@ -1,7 +1,7 @@
-const YAML = require('yaml');
+const TOML = require('@iarna/toml');
 const fs = require('fs');
 const fsPromises = fs.promises;
-const { Pair } = require('yaml/types');
+const path = require('path');
 
 const {
   NoAlacrittyFileFoundError,
@@ -26,7 +26,7 @@ function createConfigFile() {
   const templatePath = alacrittyTemplatePath();
   const configTemplate = fs.readFileSync(templatePath, 'utf8');
   const directories = pathToAlacrittyFile();
-  const configFile = `${directories}alacritty.yml`;
+  const configFile = `${directories}alacritty.toml`;
 
   // If .config/alacritty folder doesn't exists, create one
   if (!fs.existsSync(directories)) {
@@ -37,7 +37,7 @@ function createConfigFile() {
     .writeFile(configFile, configTemplate, 'utf8')
     .then(() => {
       console.log(
-        `The alacritty.yml config file was created here ${configFile}`
+        `The alacritty.toml config file was created here ${configFile}`
       );
     })
     .catch((err) => {
@@ -45,60 +45,56 @@ function createConfigFile() {
     });
 }
 
-function getCurrentTheme() {
+function getCurrentTheme(themesFolder) {
   if (!alacrittyConfigPath()) {
     console.log(
       'No Alacritty configuration file found\nRun: `alacritty-themes -C` to create one'
     );
     exit(1);
   }
-  const themeFile = fs.readFileSync(alacrittyConfigPath(), 'utf8');
-  const themeDoc = YAML.parse(themeFile);
+  const alacrittyConfig = fs.readFileSync(alacrittyConfigPath(), 'utf8');
+  const parsedAlacrittyConfig = TOML.parse(alacrittyConfig);
 
-  return themeDoc.theme ? themeDoc.theme : 'default';
+  const imports = parsedAlacrittyConfig.import || [];
+
+  // We'll consider the first theme import as the current theme
+  for (let i = 0; i < imports.length; i++) {
+    const relative = path.relative(themesFolder, imports[i]);
+    if (relative && !relative.startsWith('..') && !path.isAbsolute(relative)) {
+      return path.parse(imports[i]).name;
+    }
+  }
+
+  return 'default';
 }
 
-function updateThemeWithFile(
-  data,
-  themeName,
-  themePath,
-  ymlPath,
-  preview = false
-) {
-  const themeFile = fs.readFileSync(themePath, 'utf8');
-  const themeDoc = YAML.parseDocument(themeFile);
-  const themeColors = themeDoc.contents.items.find(
-    (i) => i.key.value === 'colors'
-  );
+function updateThemeWithFile(themePath, themesPath, tomlPath, preview = false) {
+  const alacrittyConfig = fs.readFileSync(tomlPath, 'utf8');
+  const parsedAlacrittyConfig = TOML.parse(alacrittyConfig);
 
-  const alacrittyDoc = YAML.parseDocument(data);
-  if (alacrittyDoc.contents === null) {
-    alacrittyDoc.contents = { items: [] };
+  const imports = parsedAlacrittyConfig.import || [];
+  let currentThemeIndex = undefined;
+
+  for (let i = 0; i < imports.length; i++) {
+    const relative = path.relative(themesPath, imports[i]);
+    if (relative && !relative.startsWith('..') && !path.isAbsolute(relative)) {
+      currentThemeIndex = i;
+      break;
+    }
   }
-  const alacrittyColors = alacrittyDoc.contents.items.find(
-    (i) => i.key.value === 'colors'
-  );
 
-  if (alacrittyColors) {
-    alacrittyColors.value = themeColors.value;
+  if (currentThemeIndex === undefined) {
+    parsedAlacrittyConfig.import = [themePath];
   } else {
-    alacrittyDoc.contents.items.push(new Pair('colors', themeColors.value));
+    parsedAlacrittyConfig.import[currentThemeIndex] = themePath;
   }
 
-  const alacrittyTheme = alacrittyDoc.contents.items.find(
-    (i) => i.key.value === 'theme'
-  );
+  const newContent = TOML.stringify(parsedAlacrittyConfig);
 
-  if (alacrittyTheme) {
-    alacrittyTheme.value = themeName;
-  } else {
-    alacrittyDoc.contents.items.push(new Pair('theme', themeName));
-  }
-
-  const newContent = String(alacrittyDoc);
+  const themeName = path.parse(themePath).name;
 
   return fsPromises
-    .writeFile(ymlPath, newContent, 'utf8')
+    .writeFile(tomlPath, newContent, 'utf8')
     .then(() => {
       if (!preview) {
         console.log(`The theme "${themeName}" has been applied successfully!`);
@@ -109,20 +105,17 @@ function updateThemeWithFile(
     });
 }
 
-function updateTheme(data, theme, themesFolder, ymlPath, preview = false) {
+function updateTheme(theme, themesPath, tomlPath, preview = false) {
   const isSpecificFile =
     fs.existsSync(theme) && !fs.lstatSync(theme).isDirectory();
-  const themePath = isSpecificFile ? theme : themeFilePath(theme, themesFolder);
+  const themePath = isSpecificFile ? theme : themeFilePath(theme, themesPath);
 
-  return updateThemeWithFile(data, theme, themePath, ymlPath, preview);
+  return updateThemeWithFile(themePath, themesPath, tomlPath, preview);
 }
 
 function applyTheme(theme, themesFolder, preview = false) {
-  const ymlPath = getAlacrittyConfig();
-
-  return fsPromises.readFile(ymlPath, 'utf8').then((data) => {
-    return updateTheme(data, theme, themesFolder, ymlPath, preview);
-  });
+  const tomlPath = getAlacrittyConfig();
+  return updateTheme(theme, themesFolder, tomlPath, preview);
 }
 
 module.exports = {

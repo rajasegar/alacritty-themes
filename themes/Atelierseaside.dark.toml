@@ -1,0 +1,30 @@
+# Name: Atelierseaside (dark)
+# Author: Chris Kempson
+
+[colors.primary]
+background = "#131513"
+foreground = "#8ca68c"
+
+[colors.cursor]
+text = "#131513"
+cursor = "#8ca68c"
+
+[colors.normal]
+black = "#131513"
+red = "#e6193c"
+green = "#29a329"
+yellow = "#c3c322"
+blue = "#3d62f5"
+magenta = "#ad2bee"
+cyan = "#1999b3"
+white = "#8ca68c"
+
+[colors.bright]
+black = "#687d68"
+red = "#e6193c"
+green = "#29a329"
+yellow = "#c3c322"
+blue = "#3d62f5"
+magenta = "#ad2bee"
+cyan = "#1999b3"
+white = "#f0fff0"

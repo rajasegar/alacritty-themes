@@ -1,0 +1,30 @@
+# Name: Londontube (dark)
+# Author: Chris Kempson
+
+[colors.primary]
+background = "#231f20"
+foreground = "#d9d8d8"
+
+[colors.cursor]
+text = "#231f20"
+cursor = "#d9d8d8"
+
+[colors.normal]
+black = "#231f20"
+red = "#ee2e24"
+green = "#00853e"
+yellow = "#ffd204"
+blue = "#009ddc"
+magenta = "#98005d"
+cyan = "#85cebc"
+white = "#d9d8d8"
+
+[colors.bright]
+black = "#737171"
+red = "#ee2e24"
+green = "#00853e"
+yellow = "#ffd204"
+blue = "#009ddc"
+magenta = "#98005d"
+cyan = "#85cebc"
+white = "#ffffff"

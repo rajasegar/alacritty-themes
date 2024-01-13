@@ -1,0 +1,30 @@
+# Name: tlh
+# Author: 
+
+[colors.primary]
+background = "#101010"
+foreground = "#66ff66"
+
+[colors.cursor]
+text = "#101010"
+cursor = "#66ff66"
+
+[colors.normal]
+black = "#1c1c1c"
+red = "#d81860"
+green = "#60ff60"
+yellow = "#f9fd75"
+blue = "#4695c8"
+magenta = "#a78edb"
+cyan = "#43afce"
+white = "#f3ebe2"
+
+[colors.bright]
+black = "#4d4d4d"
+red = "#f00060"
+green = "#70ff70"
+yellow = "#f9fd80"
+blue = "#5a9dc8"
+magenta = "#b29fdb"
+cyan = "#69b8ce"
+white = "#eeeeee"

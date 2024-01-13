@@ -1,0 +1,30 @@
+# Name: Greenscreen (light)
+# Author: Chris Kempson
+
+[colors.primary]
+background = "#00ff00"
+foreground = "#005500"
+
+[colors.cursor]
+text = "#00ff00"
+cursor = "#005500"
+
+[colors.normal]
+black = "#001100"
+red = "#007700"
+green = "#00bb00"
+yellow = "#007700"
+blue = "#009900"
+magenta = "#00bb00"
+cyan = "#005500"
+white = "#00bb00"
+
+[colors.bright]
+black = "#007700"
+red = "#007700"
+green = "#00bb00"
+yellow = "#007700"
+blue = "#009900"
+magenta = "#00bb00"
+cyan = "#005500"
+white = "#00ff00"

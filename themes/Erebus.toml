@@ -1,0 +1,30 @@
+# Name: Erebus
+# Author: 
+
+[colors.primary]
+background = "#000000"
+foreground = "#ffffff"
+
+[colors.cursor]
+text = "#000000"
+cursor = "#ffffff"
+
+[colors.normal]
+black = "#757575"
+red = "#ff5f5f"
+green = "#de8a36"
+yellow = "#d78787"
+blue = "#af5fd7"
+magenta = "#ff87d7"
+cyan = "#dea3e5"
+white = "#b8b8b8"
+
+[colors.bright]
+black = "#b8b8b8"
+red = "#d78787"
+green = "#ff9f6f"
+yellow = "#ff5f5f"
+blue = "#dea3e5"
+magenta = "#d7afaf"
+cyan = "#af5fd7"
+white = "#757575"

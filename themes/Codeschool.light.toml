@@ -1,0 +1,30 @@
+# Name: Codeschool (light)
+# Author: Chris Kempson
+
+[colors.primary]
+background = "#b5d8f6"
+foreground = "#2a343a"
+
+[colors.cursor]
+text = "#b5d8f6"
+cursor = "#2a343a"
+
+[colors.normal]
+black = "#232c31"
+red = "#2a5491"
+green = "#237986"
+yellow = "#a03b1e"
+blue = "#484d79"
+magenta = "#c59820"
+cyan = "#b02f30"
+white = "#9ea7a6"
+
+[colors.bright]
+black = "#3f4944"
+red = "#2a5491"
+green = "#237986"
+yellow = "#a03b1e"
+blue = "#484d79"
+magenta = "#c59820"
+cyan = "#b02f30"
+white = "#b5d8f6"

@@ -1,0 +1,30 @@
+# Name: jmbi
+# Author: jmbi
+
+[colors.primary]
+background = "#1e1e1e"
+foreground = "#ffffff"
+
+[colors.cursor]
+text = "#1e1e1e"
+cursor = "#ffffff"
+
+[colors.normal]
+black = "#5A7260"
+red = "#8F423C"
+green = "#BBBB88"
+yellow = "#F9D25B"
+blue = "#E0BA69"
+magenta = "#709289"
+cyan = "#D13516"
+white = "#EFE2E0"
+
+[colors.bright]
+black = "#8DA691"
+red = "#EEAA88"
+green = "#CCC68D"
+yellow = "#EEDD99"
+blue = "#C9B957"
+magenta = "#FFCBAB"
+cyan = "#C25431"
+white = "#F9F1ED"

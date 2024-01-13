@@ -1,0 +1,30 @@
+# Name: Isotope (light)
+# Author: Chris Kempson
+
+[colors.primary]
+background = "#ffffff"
+foreground = "#606060"
+
+[colors.cursor]
+text = "#ffffff"
+cursor = "#606060"
+
+[colors.normal]
+black = "#000000"
+red = "#ff0000"
+green = "#33ff00"
+yellow = "#ff0099"
+blue = "#0066ff"
+magenta = "#cc00ff"
+cyan = "#00ffff"
+white = "#d0d0d0"
+
+[colors.bright]
+black = "#808080"
+red = "#ff0000"
+green = "#33ff00"
+yellow = "#ff0099"
+blue = "#0066ff"
+magenta = "#cc00ff"
+cyan = "#00ffff"
+white = "#ffffff"
