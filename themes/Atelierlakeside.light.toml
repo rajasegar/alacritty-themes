@@ -1,0 +1,30 @@
+# Name: Atelierlakeside (light)
+# Author: Chris Kempson
+
+[colors.primary]
+background = "#ebf8ff"
+foreground = "#516d7b"
+
+[colors.cursor]
+text = "#ebf8ff"
+cursor = "#516d7b"
+
+[colors.normal]
+black = "#161b1d"
+red = "#d22d72"
+green = "#568c3b"
+yellow = "#8a8a0f"
+blue = "#257fad"
+magenta = "#5d5db1"
+cyan = "#2d8f6f"
+white = "#7ea2b4"
+
+[colors.bright]
+black = "#5a7b8c"
+red = "#d22d72"
+green = "#568c3b"
+yellow = "#8a8a0f"
+blue = "#257fad"
+magenta = "#5d5db1"
+cyan = "#2d8f6f"
+white = "#ebf8ff"

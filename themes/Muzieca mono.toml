@@ -1,0 +1,30 @@
+# Name: Mono
+# Author: Muzieca
+
+[colors.primary]
+background = "#000000"
+foreground = "#ffffff"
+
+[colors.cursor]
+text = "#000000"
+cursor = "#ffffff"
+
+[colors.normal]
+black = "#000000"
+red = "#111111"
+green = "#222222"
+yellow = "#333333"
+blue = "#444444"
+magenta = "#555555"
+cyan = "#666666"
+white = "#777777"
+
+[colors.bright]
+black = "#090909"
+red = "#181818"
+green = "#272727"
+yellow = "#393939"
+blue = "#484848"
+magenta = "#595959"
+cyan = "#707070"
+white = "#818181"
