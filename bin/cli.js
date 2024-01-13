@@ -42,7 +42,7 @@ function main() {
   }
 
   if (['--current', '-c'].includes(command)) {
-    return console.log(getCurrentTheme());
+    return console.log(getCurrentTheme(themesFolderPath));
   }
 
   if (['--list', '-l'].includes(command)) {
