@@ -1,4 +1,4 @@
-const TOML = require('toml')
+const TOML = require('toml');
 const fs = require('fs');
 const fsPromises = fs.promises;
 const path = require('path');
@@ -58,19 +58,12 @@ function getCurrentTheme(themesFolder) {
 
   // We'll consider the first theme import as the current theme
   const imports = parsedAlacrittyConfig.import || [];
-  const themeImports = imports.filter((i) => path.relative(themesFolder, i)); 
+  const themeImports = imports.filter((i) => path.relative(themesFolder, i));
 
-  return themeImports.length > 0
-    ? path.parse(themeImports[0]).name
-    : 'default';
+  return themeImports.length > 0 ? path.parse(themeImports[0]).name : 'default';
 }
 
-function updateThemeWithFile(
-  themePath,
-  themesPath,
-  tomlPath,
-  preview = false
-) {
+function updateThemeWithFile(themePath, themesPath, tomlPath, preview = false) {
   const alacrittyConfig = fs.readFileSync(tomlPath, 'utf8');
   const parsedAlacrittyConfig = TOML.parse(alacrittyConfig);
 
@@ -91,8 +84,9 @@ function updateThemeWithFile(
     parsedAlacrittyConfig.import[currentThemeIndex] = themePath;
   }
 
-  const newContent = json2toml(parsedAlacrittyConfig, 
-    options = { newlineAfterSection: true });
+  const newContent = json2toml(parsedAlacrittyConfig, {
+    newlineAfterSection: true,
+  });
 
   const themeName = path.parse(themePath).name;
 
