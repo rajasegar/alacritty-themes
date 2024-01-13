@@ -55,11 +55,17 @@ function getCurrentTheme(themesFolder) {
   const alacrittyConfig = fs.readFileSync(alacrittyConfigPath(), 'utf8');
   const parsedAlacrittyConfig = TOML.parse(alacrittyConfig);
 
-  // We'll consider the first theme import as the current theme
   const imports = parsedAlacrittyConfig.import || [];
-  const themeImports = imports.filter((i) => path.relative(themesFolder, i));
 
-  return themeImports.length > 0 ? path.parse(themeImports[0]).name : 'default';
+  // We'll consider the first theme import as the current theme
+  for (let i = 0; i < imports.length; i++) {
+    const relative = path.relative(themesFolder, imports[i]);
+    if (relative && !relative.startsWith('..') && !path.isAbsolute(relative)) {
+      return path.parse(imports[i]).name;
+    }
+  }
+
+  return 'default';
 }
 
 function updateThemeWithFile(themePath, themesPath, tomlPath, preview = false) {
