@@ -38,7 +38,7 @@ function existingTheme(themeName, themesFolder) {
 }
 
 function themeFilePath(themeName, themesFolder) {
-  return path.join(themesFolder, `${themeName}.yml`);
+  return path.join(themesFolder, `${themeName}.toml`);
 }
 
 function themesFolder() {
@@ -76,7 +76,7 @@ function pathToAlacrittyFileOnLinux() {
 }
 
 function alacrittyTemplatePath() {
-  return path.join(rootDirectory(), 'alacritty.yml');
+  return path.join(rootDirectory(), 'alacritty.toml');
 }
 
 function alacrittyFileExists() {
@@ -98,21 +98,21 @@ function possibleLocations() {
 
   if (linuxHome()) {
     locations.push(
-      path.join(linuxHome(), '.config/alacritty/alacritty.yml'),
-      path.join(linuxHome(), '.alacritty.yml')
+      path.join(linuxHome(), '.config/alacritty/alacritty.toml'),
+      path.join(linuxHome(), '.alacritty.toml')
     );
   }
 
   if (isWindows()) {
-    locations.push(path.join(windowsHome(), 'alacritty/alacritty.yml'));
+    locations.push(path.join(windowsHome(), 'alacritty/alacritty.toml'));
   }
 
   // locations where the alacritty config can be located according to
   // https://github.com/alacritty/alacritty#configuration
   if (archHome()) {
     locations.push(
-      path.join(archHome(), 'alacritty/alacritty.yml'),
-      path.join(archHome(), 'alacritty.yml')
+      path.join(archHome(), 'alacritty/alacritty.toml'),
+      path.join(archHome(), 'alacritty.toml')
     );
   }
 

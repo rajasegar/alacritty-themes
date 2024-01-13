@@ -14,7 +14,7 @@ const {
 const { applyTheme, createConfigFile, getCurrentTheme } = require('../index');
 
 let themesFolderPath = themesFolder();
-let themes = fs.readdirSync(themesFolderPath).map((f) => f.replace('.yml', ''));
+let themes = fs.readdirSync(themesFolderPath).map((f) => f.replace('.toml', ''));
 
 function main() {
   createBackup();
@@ -30,7 +30,7 @@ function main() {
     }
 
     themesFolderPath = path.resolve(process.argv[3]);
-    themes = fs.readdirSync(themesFolderPath).map((f) => f.replace('.yml', ''));
+    themes = fs.readdirSync(themesFolderPath).map((f) => f.replace('.toml', ''));
   }
 
   if (['--help', '-h'].includes(command)) {
