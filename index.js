@@ -1,8 +1,7 @@
-const TOML = require('toml');
+const TOML = require('@iarna/toml');
 const fs = require('fs');
 const fsPromises = fs.promises;
 const path = require('path');
-const json2toml = require('json2toml');
 
 const {
   NoAlacrittyFileFoundError,
@@ -84,9 +83,7 @@ function updateThemeWithFile(themePath, themesPath, tomlPath, preview = false) {
     parsedAlacrittyConfig.import[currentThemeIndex] = themePath;
   }
 
-  const newContent = json2toml(parsedAlacrittyConfig, {
-    newlineAfterSection: true,
-  });
+  const newContent = TOML.stringify(parsedAlacrittyConfig);
 
   const themeName = path.parse(themePath).name;
 

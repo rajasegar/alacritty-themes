@@ -23,10 +23,9 @@
   "author": "Rajasegar Chandran <rajasegar.c@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "json2toml": "^6.0.0",
+    "@iarna/toml": "^2.2.5",
     "prompts": "2.4.2",
     "temp": "0.9.4",
-    "toml": "^3.0.0",
     "yaml": "1.10.2"
   },
   "preferGlobal": true,
