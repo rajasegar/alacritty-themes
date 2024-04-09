@@ -26,22 +26,22 @@ jobs:
       run: |
         yarn test
 
-  build-and-deploy:
-    name: Publish
-    needs: [lint]
-    runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, 'skip ci')"
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    - name: Volta setup
-      uses: rwjblue/setup-volta@v1
-    - name: Install
-      run: yarn install
-    - name: Release
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_PAT }}
-        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      run: yarn semantic-release
+  # build-and-deploy:
+  #   name: Publish
+  #   needs: [lint]
+  #   runs-on: ubuntu-latest
+  #   if: "!contains(github.event.head_commit.message, 'skip ci')"
+  #   steps:
+  #   - name: Checkout
+  #     uses: actions/checkout@v2
+  #     with:
+  #       fetch-depth: 0
+  #   - name: Volta setup
+  #     uses: rwjblue/setup-volta@v1
+  #   - name: Install
+  #     run: yarn install
+  #   - name: Release
+  #     env:
+  #       GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+  #       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+  #     run: yarn semantic-release

@@ -8,7 +8,7 @@ const {
   createBackup,
   helpMessage,
   existingTheme,
-  themesFolder,
+  themesFolder
 } = require('../src/helpers');
 
 const { applyTheme, createConfigFile, getCurrentTheme } = require('../index');
@@ -19,12 +19,12 @@ let themes = fs
   .map((f) => f.replace('.toml', ''));
 
 function main() {
-  createBackup();
+  // createBackup();
   const command = process.argv[2];
 
-  if (existingTheme(command, themesFolderPath)) {
-    return applyTheme(command, themesFolderPath);
-  }
+  // if (existingTheme(command, themesFolderPath)) {
+  // return applyTheme(command, themesFolderPath);
+  // }
 
   if (['--directory', '-d'].includes(command)) {
     if (process.argv[3] === undefined) {
@@ -63,16 +63,20 @@ function main() {
       choices: themes.map((t) => {
         return {
           title: t,
-          value: t,
+          value: t
         };
       }),
       onState: (state) => {
-        state.value && applyTheme(state.value, themesFolderPath, true); // set preview true
+        // state.value && applyTheme(state.value, themesFolderPath, true); // set preview true
       },
+      onCancel: (state) => {
+        // revert to backup
+      }
     });
 
     try {
       if (response.theme) {
+        createBackup();
         applyTheme(response.theme, themesFolderPath);
       }
     } catch (e) {
