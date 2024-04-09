@@ -1,0 +1,30 @@
+# Name: Pulp
+# Author: 
+
+[colors.primary]
+background = "#000000"
+foreground = "#ffffff"
+
+[colors.cursor]
+text = "#000000"
+cursor = "#ffffff"
+
+[colors.normal]
+black = "#86817e"
+red = "#d75756"
+green = "#688c7d"
+yellow = "#ffb365"
+blue = "#68778c"
+magenta = "#fdb3b2"
+cyan = "#86abd9"
+white = "#f7f8f2"
+
+[colors.bright]
+black = "#86817e"
+red = "#a63a3a"
+green = "#688c7d"
+yellow = "#ffb365"
+blue = "#68778c"
+magenta = "#8c686a"
+cyan = "#86abd9"
+white = "#f7f8f2"

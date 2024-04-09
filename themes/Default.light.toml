@@ -1,0 +1,30 @@
+# Name: Default (light)
+# Author: Chris Kempson
+
+[colors.primary]
+background = "#f5f5f5"
+foreground = "#303030"
+
+[colors.cursor]
+text = "#f5f5f5"
+cursor = "#303030"
+
+[colors.normal]
+black = "#151515"
+red = "#ac4142"
+green = "#90a959"
+yellow = "#f4bf75"
+blue = "#6a9fb5"
+magenta = "#aa759f"
+cyan = "#75b5aa"
+white = "#d0d0d0"
+
+[colors.bright]
+black = "#505050"
+red = "#ac4142"
+green = "#90a959"
+yellow = "#f4bf75"
+blue = "#6a9fb5"
+magenta = "#aa759f"
+cyan = "#75b5aa"
+white = "#f5f5f5"

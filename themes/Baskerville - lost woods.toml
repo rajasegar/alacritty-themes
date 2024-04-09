@@ -1,0 +1,30 @@
+# Name: Lost Woods
+# Author: Baskerville
+
+[colors.primary]
+background = "#000000"
+foreground = "#919191"
+
+[colors.cursor]
+text = "#000000"
+cursor = "#919191"
+
+[colors.normal]
+black = "#303030"
+red = "#a13a38"
+green = "#00715d"
+yellow = "#006f32"
+blue = "#a43261"
+magenta = "#913e88"
+cyan = "#007086"
+white = "#c6c6c6"
+
+[colors.bright]
+black = "#5e5e5e"
+red = "#ffa59a"
+green = "#24dfc4"
+yellow = "#73db95"
+blue = "#ff9fc9"
+magenta = "#ffa7f6"
+cyan = "#00ddf4"
+white = "#ffffff"
