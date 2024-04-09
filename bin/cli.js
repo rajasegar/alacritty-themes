@@ -7,8 +7,8 @@ const prompts = require('prompts');
 const {
   createBackup,
   helpMessage,
-  existingTheme,
-  themesFolder
+  // existingTheme,
+  themesFolder,
 } = require('../src/helpers');
 
 const { applyTheme, createConfigFile, getCurrentTheme } = require('../index');
@@ -63,15 +63,15 @@ function main() {
       choices: themes.map((t) => {
         return {
           title: t,
-          value: t
+          value: t,
         };
       }),
-      onState: (state) => {
-        // state.value && applyTheme(state.value, themesFolderPath, true); // set preview true
-      },
-      onCancel: (state) => {
-        // revert to backup
-      }
+      // onState: (state) => {
+      // state.value && applyTheme(state.value, themesFolderPath, true); // set preview true
+      // },
+      // onCancel: (state) => {
+      // revert to backup
+      // },
     });
 
     try {

@@ -9,7 +9,7 @@ const {
   alacrittyFileExists,
   alacrittyTemplatePath,
   pathToAlacrittyFile,
-  themeFilePath
+  themeFilePath,
 } = require('./src/helpers');
 const { exit } = require('process');
 
@@ -122,5 +122,5 @@ module.exports = {
   applyTheme,
   createConfigFile,
   getAlacrittyConfig,
-  getCurrentTheme
+  getCurrentTheme,
 };
