@@ -22,7 +22,7 @@ describe('rootDirectory', () => {
 
 describe('themeFilePath', 'themesFolder', () => {
   it('returns a theme file', () => {
-    let path = `${settings.PROJECT_DIR}/themes/TokyoNight_Storm.yml`;
+    let path = `${settings.PROJECT_DIR}/themes/TokyoNight_Storm.toml`;
     let themePath = {};
     themePath[path] = '# TokyoNight Alacritty Colors';
     mockFs(themePath);
@@ -34,12 +34,12 @@ describe('themeFilePath', 'themesFolder', () => {
   });
 
   it('does not return a theme file', () => {
-    let path = `${settings.PROJECT_DIR}/themes/TokyoNight_Storm.yml`;
+    let path = `${settings.PROJECT_DIR}/themes/TokyoNight_Storm.toml`;
     let themePath = {};
     themePath[path] = '# TokyoNight Alacritty Colors';
 
     mockFs({
-      'TokyoNight_Storm.yml': '# TokyoNight Alacritty Colors',
+      'TokyoNight_Storm.toml': '# TokyoNight Alacritty Colors',
     });
 
     assert.strictEqual(
@@ -110,8 +110,8 @@ describe('possibleLocations', () => {
     let locations = helper.possibleLocations();
 
     assert(locations, [
-      `${home}/.config/alacritty/alacritty.yml`,
-      `${home}/.config/.alacritty.yml`,
+      `${home}/.config/alacritty/alacritty.toml`,
+      `${home}/.config/.alacritty.toml`,
     ]);
   });
 
@@ -124,10 +124,10 @@ describe('possibleLocations', () => {
     let locations = helper.possibleLocations();
 
     assert(locations, [
-      `${home}/.config/alacritty/alacritty.yml`,
-      `${home}/.alacritty.yml`,
-      `${local}/alacritty/alacritty.yml`,
-      `${local}/alacritty.yml`,
+      `${home}/.config/alacritty/alacritty.toml`,
+      `${home}/.alacritty.toml`,
+      `${local}/alacritty/alacritty.toml`,
+      `${local}/alacritty.toml`,
     ]);
   });
 });
