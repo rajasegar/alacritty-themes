@@ -9,10 +9,10 @@ Themes :candy: for [alacritty](https://github.com/alacritty/alacritty) A cross-p
 
 To find the list of themes, you can visit the alacritty [wiki page](https://github.com/alacritty/alacritty/wiki/Color-schemes)
 
-- Live preview the themes
+- ~~Live preview the themes~~
 - 200+ Themes to choose from
 - Apply any theme with just one command at the terminal
-- Option to create your `alacritty.yml` config file
+- Option to create your `alacritty.toml` config file
 - Simple, Easy and intuitive User experience
 
 ## Install
@@ -56,7 +56,7 @@ The list of options are cycled through automatically so you can go to the last t
 by just pressing `up arrow` key.
 The search is fuzzy so you can enter any part of the theme name to search.
 
-If no `alacritty.yml` is found in your `$HOME` path, you can create one using the `--create` or `-c` option.
+If no `alacritty.toml` is found in your `$HOME` path, you can create one using the `--create` or `-c` option.
 
 ```
 alacritty-themes --create
@@ -66,11 +66,11 @@ alacritty-themes --create
 
 We have experienced some errors when stringifying.
 Probably, those are happening when changing themes,
-that's the reason we decided to create backups of the `alacritty.yml` before changing the theme.
+that's the reason we decided to create backups of the `alacritty.toml` before changing the theme.
 
 This action could produce a bunch of backup files,
 while we get a better solution you can remove all the backups with a
-single command: `rm ~/.config/alacritty/alacritty.yml.*`
+single command: `rm ~/.config/alacritty/alacritty.toml.*`
 
 ## Bonus Tip: Alias
 
