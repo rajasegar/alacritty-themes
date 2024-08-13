@@ -3,14 +3,9 @@
 const fs = require('fs');
 const path = require('path');
 const prompts = require('prompts');
+const Fuse = require('fuse.js');
 
-const {
-  createBackup,
-  helpMessage,
-  // existingTheme,
-  themesFolder,
-} = require('../src/helpers');
-
+const { createBackup, helpMessage, themesFolder } = require('../src/helpers');
 const { applyTheme, createConfigFile, getCurrentTheme } = require('../index');
 
 let themesFolderPath = themesFolder();
@@ -19,12 +14,7 @@ let themes = fs
   .map((f) => f.replace('.toml', ''));
 
 function main() {
-  // createBackup();
   const command = process.argv[2];
-
-  // if (existingTheme(command, themesFolderPath)) {
-  // return applyTheme(command, themesFolderPath);
-  // }
 
   if (['--directory', '-d'].includes(command)) {
     if (process.argv[3] === undefined) {
@@ -36,6 +26,11 @@ function main() {
       .readdirSync(themesFolderPath)
       .map((f) => f.replace('.toml', ''));
   }
+
+  const fuse_instance = new Fuse(themes, {
+    keys: ['title'],
+    threshold: 0.5,
+  });
 
   if (['--help', '-h'].includes(command)) {
     return console.log(helpMessage());
@@ -66,12 +61,11 @@ function main() {
           value: t,
         };
       }),
-      // onState: (state) => {
-      // state.value && applyTheme(state.value, themesFolderPath, true); // set preview true
-      // },
-      // onCancel: (state) => {
-      // revert to backup
-      // },
+      suggest: (input, choices) => {
+        if (input.length === 0) return choices;
+        const fuzzy_results = fuse_instance.search(input);
+        return fuzzy_results.map((result) => result.item);
+      },
     });
 
     try {
