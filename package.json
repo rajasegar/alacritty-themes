@@ -26,7 +26,7 @@
     "@iarna/toml": "^2.2.5",
     "prompts": "2.4.2",
     "temp": "0.9.4",
-    "yaml": "1.10.2"
+    "yaml": "2.3.1"
   },
   "preferGlobal": true,
   "devDependencies": {
