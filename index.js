@@ -55,7 +55,7 @@ function getCurrentTheme(themesFolder) {
   const alacrittyConfig = fs.readFileSync(alacrittyConfigPath(), 'utf8');
   const parsedAlacrittyConfig = TOML.parse(alacrittyConfig);
 
-  const imports = parsedAlacrittyConfig.import || [];
+  const imports = parsedAlacrittyConfig.general?.import || [];
 
   // We'll consider the first theme import as the current theme
   for (let i = 0; i < imports.length; i++) {
@@ -72,7 +72,7 @@ function updateThemeWithFile(themePath, themesPath, tomlPath, preview = false) {
   const alacrittyConfig = fs.readFileSync(tomlPath, 'utf8');
   const parsedAlacrittyConfig = TOML.parse(alacrittyConfig);
 
-  const imports = parsedAlacrittyConfig.import || [];
+  const imports = parsedAlacrittyConfig.general?.import || [];
   let currentThemeIndex = undefined;
 
   for (let i = 0; i < imports.length; i++) {
@@ -84,9 +84,9 @@ function updateThemeWithFile(themePath, themesPath, tomlPath, preview = false) {
   }
 
   if (currentThemeIndex === undefined) {
-    parsedAlacrittyConfig.import = [themePath];
+    parsedAlacrittyConfig.general.import = [themePath];
   } else {
-    parsedAlacrittyConfig.import[currentThemeIndex] = themePath;
+    parsedAlacrittyConfig.general.import[currentThemeIndex] = themePath;
   }
 
   const newContent = TOML.stringify(parsedAlacrittyConfig);
