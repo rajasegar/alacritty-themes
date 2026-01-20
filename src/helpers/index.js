@@ -38,7 +38,7 @@ function existingTheme(themeName, themesFolder) {
 }
 
 function themeFilePath(themeName, themesFolder) {
-  return path.join(themesFolder, `${themeName}.toml`);
+  return path.join(themesFolder, `${themeName}.yml`);
 }
 
 function themesFolder() {
@@ -76,7 +76,7 @@ function pathToAlacrittyFileOnLinux() {
 }
 
 function alacrittyTemplatePath() {
-  return path.join(rootDirectory(), 'alacritty.toml');
+  return path.join(rootDirectory(), 'alacritty.yml');
 }
 
 function alacrittyFileExists() {
@@ -98,21 +98,21 @@ function possibleLocations() {
 
   if (linuxHome()) {
     locations.push(
-      path.join(linuxHome(), '.config/alacritty/alacritty.toml'),
-      path.join(linuxHome(), '.alacritty.toml')
+      path.join(linuxHome(), '.config/alacritty/alacritty.yml'),
+      path.join(linuxHome(), '.alacritty.yml')
     );
   }
 
   if (isWindows()) {
-    locations.push(path.join(windowsHome(), 'alacritty/alacritty.toml'));
+    locations.push(path.join(windowsHome(), 'alacritty/alacritty.yml'));
   }
 
   // locations where the alacritty config can be located according to
   // https://github.com/alacritty/alacritty#configuration
   if (archHome()) {
     locations.push(
-      path.join(archHome(), 'alacritty/alacritty.toml'),
-      path.join(archHome(), 'alacritty.toml')
+      path.join(archHome(), 'alacritty/alacritty.yml'),
+      path.join(archHome(), 'alacritty.yml')
     );
   }
 
@@ -130,6 +130,18 @@ function helpMessage() {
     \t--current, -c\tshows applied theme name
     \t--list, -l\tlists all available themes
     \t--directory, -d\tspecify themes directory
+
+    Font options:
+    \t--size, -s\tset font size (e.g. -s 14)
+    \t--font, -f\tset font family (e.g. -f "JetBrains Mono")
+    \t--font-info, -F\tshow current font/opacity settings
+    \t--select-font, -S\tinteractive font selector with live preview
+    \t--select-size, -Z\tinteractive size selector with live preview
+    \t--all\t\tuse with -S to show all fonts (not just monospace)
+
+    Opacity options:
+    \t--opacity, -o\tset opacity (e.g. -o 0.9)
+    \t--select-opacity, -O\tinteractive opacity selector with live preview
   `;
 }
 
